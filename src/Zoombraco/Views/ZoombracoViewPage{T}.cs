@@ -7,6 +7,8 @@ namespace Zoombraco.Views
 {
     using Umbraco.Web.Mvc;
 
+    using Zoombraco.Helpers;
+
     /// <summary>
     /// The view that all Zoombraco views inherit.
     /// </summary>

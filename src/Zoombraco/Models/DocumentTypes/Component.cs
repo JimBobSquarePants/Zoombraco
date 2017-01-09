@@ -13,6 +13,8 @@ namespace Zoombraco.Models
 
     using Umbraco.Web;
 
+    using Zoombraco.Helpers;
+
     /// <summary>
     /// Represents a single published component in the content section.
     /// </summary>

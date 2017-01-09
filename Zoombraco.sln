@@ -7,11 +7,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zoombraco", "src\Zoombraco\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{F6C37B62-29BE-406F-8818-C33CE5838C4F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D597F02E-3E69-470F-AECB-A6EB4C969320}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{D597F02E-3E69-470F-AECB-A6EB4C969320}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoombracoDemo.Logic", "tests\ZoombracoDemo.Logic\ZoombracoDemo.Logic.csproj", "{838C9A49-63D9-4537-AAB2-9A7D7A2D746B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoombracoDemo.Web", "tests\ZoombracoDemo.Web\ZoombracoDemo.Web.csproj", "{0BE28ECC-BA10-4AA7-8F1E-574BDA11B797}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{871060E8-59B7-4E28-A3A0-31C183C09308}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

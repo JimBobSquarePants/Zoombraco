@@ -269,8 +269,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Caching\ZoombracoApplicationCache.cs" />
-    <Compile Include="Common\Extensions\EnumExtensions.cs" />
-    <Compile Include="Common\Helpers\UmbracoContextHelper.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="ComponentModel\Caching\UmbracoOutputCacheAttribute.cs" />
     <Compile Include="ComponentModel\Processors\NuPickerAttribute.cs" />
     <Compile Include="Controllers\XmlSitemapController.cs" />
@@ -283,14 +282,14 @@
     <Compile Include="ZoombracoApplicationEvents.cs" />
     <Compile Include="ZoombracoGlobal.cs" />
     <Compile Include="ZoombracoConfiguration.cs" />
-    <Compile Include="Common\Extensions\StringExtensions.cs" />
-    <Compile Include="Common\Helpers\CookieTempDataProvider.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Helpers\CookieTempDataProvider.cs" />
     <Compile Include="Models\MediaTypes\Image.cs" />
     <Compile Include="Models\MediaTypes\File.cs" />
     <Compile Include="Models\MediaTypes\IFile.cs" />
     <Compile Include="ComponentModel\Processors\NuPickerEnumAttribute.cs" />
-    <Compile Include="ContentHelper.cs" />
-    <Compile Include="Common\Helpers\JsonNetResult.cs" />
+    <Compile Include="Helpers\ContentHelper.cs" />
+    <Compile Include="Helpers\JsonNetResult.cs" />
     <Compile Include="Controllers\ZoombracoController.cs" />
     <Compile Include="Models\DocumentTypes\ChangeFrequency.cs" />
     <Compile Include="Models\DocumentTypes\IUrl.cs" />

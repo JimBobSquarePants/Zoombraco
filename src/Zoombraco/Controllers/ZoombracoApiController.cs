@@ -8,6 +8,8 @@ namespace Zoombraco.Controllers
     using Umbraco.Web;
     using Umbraco.Web.WebApi;
 
+    using Zoombraco.Helpers;
+
     /// <summary>
     /// The base class for autorouted API controllers.
     /// </summary>

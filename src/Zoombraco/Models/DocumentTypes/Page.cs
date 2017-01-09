@@ -16,6 +16,7 @@ namespace Zoombraco.Models
     using Umbraco.Web;
 
     using Zoombraco.Extensions;
+    using Zoombraco.Helpers;
 
     /// <summary>
     /// Represents a single published page in the content section.

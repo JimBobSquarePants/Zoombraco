@@ -1,0 +1,15 @@
+﻿@{
+    Layout = "~/Views/Site.cshtml";
+}
+
+@section HeaderAssets{
+
+    @Html.Partial("~/Views/Partials/Shared/_HeaderAssets.cshtml")
+}
+<div class="container">
+    @RenderBody()
+</div>
+@section BodyAssets{
+
+    @Html.Partial("~/Views/Partials/Shared/_BodyAssets.cshtml")
+}

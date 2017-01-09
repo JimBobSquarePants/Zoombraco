@@ -1,0 +1,22 @@
+<StyleCopSettings Version="105">
+  <GlobalSettings>
+    <CollectionProperty Name="RecognizedWords">
+      <Value>api</Value>
+      <Value>doctype</Value>
+      <Value>doctypes</Value>
+      <Value>json</Value>
+      <Value>lucene</Value>
+      <Value>navi</Value>
+      <Value>umbraco</Value>
+      <Value>umbracoNaviHide</Value>
+    </CollectionProperty>
+  </GlobalSettings>
+  <Analyzers>
+    <Analyzer AnalyzerId="StyleCop.CSharp.DocumentationRules">
+      <AnalyzerSettings>
+        <StringProperty Name="CompanyName">James Jackson-South</StringProperty>
+        <StringProperty Name="Copyright">Copyright (c) James Jackson-South and contributors</StringProperty>
+      </AnalyzerSettings>
+    </Analyzer>
+  </Analyzers>
+</StyleCopSettings>

@@ -1,0 +1,19 @@
+﻿@using Zoombraco.Models
+@using Zoombraco.Views
+
+@inherits ZoombracoViewPage<IRenderPage<Zoombraco.Models.Page>>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="@Model.CurrentCulture.TwoLetterISOLanguageName" prefix="og: http://ogp.me/ns#">
+<head>
+    @Html.Partial("~/Views/Partials/Shared/_Meta.cshtml", Model)
+    @RenderSection("HeaderAssets", false)
+</head>
+<body>
+    @RenderBody()
+    @RenderSection("BodyAssets", false)
+</body>
+</html>

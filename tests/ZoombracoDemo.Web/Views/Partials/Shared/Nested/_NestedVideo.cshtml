@@ -1,0 +1,22 @@
+﻿@using Zoombraco.Extensions
+@using ZoombracoDemo.Logic.Models
+@model NestedVideo
+
+@{
+    string id = string.Empty;
+    switch (Model.VideoProvider)
+    {
+        case VideoProvider.YouTube:
+            id = Model.VideoUrl.Substring(Model.VideoUrl.LastIndexOf("=", StringComparison.Ordinal) + 1);
+            break;
+
+        case VideoProvider.Vimeo:
+            id = Model.VideoUrl.Substring(Model.VideoUrl.LastIndexOf("/", StringComparison.Ordinal) + 1);
+            break;
+    }
+
+    string src = string.Format("{0}{1}", Model.VideoProvider.ToDisplay(), id);
+}
+<div class="media">
+    <iframe src="@src" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+</div>

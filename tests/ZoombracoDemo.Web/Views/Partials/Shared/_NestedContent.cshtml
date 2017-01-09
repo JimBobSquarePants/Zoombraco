@@ -1,0 +1,7 @@
+﻿@using Zoombraco.Models
+@model ZoombracoDemo.Logic.Models.INested
+
+@foreach (NestedComponent content in Model.NestedContent)
+{
+    Html.RenderPartial(string.Format("~/Views/Partials/Shared/Nested/_{0}.cshtml", content.DocumentTypeAlias.ToFirstUpperInvariant()), content);
+}

@@ -353,6 +353,10 @@
     <Content Include="Views\Partials\Shared\_HeaderAssets.cshtml" />
     <Content Include="Views\Shared\XmlSitemap.cshtml" />
     <Content Include="App_Plugins\NestedContent\package.manifest" />
+    <Content Include="Views\Generic.cshtml" />
+    <Content Include="Views\Partials\Shared\_NestedContent.cshtml" />
+    <Content Include="Views\Partials\Shared\Nested\_NestedRichText.cshtml" />
+    <Content Include="Views\Partials\Shared\Nested\_NestedVideo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

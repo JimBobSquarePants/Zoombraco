@@ -1,0 +1,20 @@
+﻿@using Zoombraco.Models
+@using ZoombracoDemo.Logic.Helpers
+@model Image
+
+@if (Model != null)
+{
+    string alias = (string)ViewData["alias"];
+    string media = (string)ViewData["media"] ?? "(min-width: 992px)";
+    bool pad = ViewData["pad"] != null && Convert.ToBoolean(ViewData["pad"]);
+
+    // Mobile is hi-res by default.
+    // TODO: Why are we getting cache misses on GetCdnCropUrl method.
+    string src = Model.GetCropUrl(alias, true, true, 60);
+    string srcM = Model.GetCropUrl(ImageCropperConstants.ToM(alias));
+
+    <picture>
+        <source media="@media" srcset="@srcM" />
+        <img srcset="@src" alt="@Model.Name">
+    </picture>
+}

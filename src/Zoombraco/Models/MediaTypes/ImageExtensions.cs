@@ -10,7 +10,6 @@ namespace Zoombraco.Models
     using System.Net;
     using System.Web;
 
-    using Umbraco.Core;
     using Umbraco.Core.Logging;
 
     using Zoombraco.Caching;

@@ -269,11 +269,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Caching\ZoombracoApplicationCache.cs" />
+    <Compile Include="ComponentModel\PropertyValueConverters\RelatedLink\RelatedLinksPropertyConverter.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="ComponentModel\Caching\UmbracoOutputCacheAttribute.cs" />
     <Compile Include="ComponentModel\Processors\NuPickerAttribute.cs" />
     <Compile Include="Controllers\XmlSitemapController.cs" />
     <Compile Include="Controllers\ZoombracoApiController.cs" />
+    <Compile Include="Models\DataTypes\RelatedLink\RelatedLink.cs" />
+    <Compile Include="Models\DataTypes\RelatedLink\RelatedLinkBase.cs" />
+    <Compile Include="Models\DataTypes\RelatedLink\RelatedLinkData.cs" />
+    <Compile Include="Models\DataTypes\RelatedLink\RelatedLinkType.cs" />
     <Compile Include="Models\DocumentTypes\NestedComponent.cs" />
     <Compile Include="Models\MediaTypes\ImageExtensions.cs" />
     <Compile Include="Models\Pocos\SitemapItem.cs" />
@@ -315,6 +320,8 @@
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
     <None Include="app.config" />
+    <None Include="ComponentModel\PropertyValueConverters\RelatedLink\README.md" />
+    <None Include="Models\DataTypes\RelatedLink\README.md" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

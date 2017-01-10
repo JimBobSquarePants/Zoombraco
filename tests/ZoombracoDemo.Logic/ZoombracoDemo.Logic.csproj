@@ -264,6 +264,9 @@
   <ItemGroup>
     <Compile Include="Controllers\GenericController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Helpers\ImageCropperConstants.cs" />
+    <Compile Include="Models\Compositions\IHeroPanel.cs" />
+    <Compile Include="Models\Compositions\IThumbnail.cs" />
     <Compile Include="Models\Compositions\INested.cs" />
     <Compile Include="Models\NestedComponents\NestedRichText.cs" />
     <Compile Include="Models\NestedComponents\NestedVideo.cs" />

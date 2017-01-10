@@ -357,6 +357,8 @@
     <Content Include="Views\Partials\Shared\_NestedContent.cshtml" />
     <Content Include="Views\Partials\Shared\Nested\_NestedRichText.cshtml" />
     <Content Include="Views\Partials\Shared\Nested\_NestedVideo.cshtml" />
+    <Content Include="Views\Partials\Shared\_HeroPanel.cshtml" />
+    <Content Include="Views\Partials\Shared\_Picture.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

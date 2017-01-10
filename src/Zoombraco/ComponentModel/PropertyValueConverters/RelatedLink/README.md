@@ -1,0 +1,1 @@
+﻿Property value converter adapted from https://github.com/Jeavon/Umbraco-Core-Property-Value-Converters

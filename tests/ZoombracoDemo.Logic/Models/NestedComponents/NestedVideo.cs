@@ -5,6 +5,9 @@
 
 namespace ZoombracoDemo.Logic.Models
 {
+    using System;
+
+    using Zoombraco.Extensions;
     using Zoombraco.Models;
 
     /// <summary>
@@ -21,5 +24,26 @@ namespace ZoombracoDemo.Logic.Models
         /// Gets or sets the video url
         /// </summary>
         public virtual string VideoUrl { get; set; }
+
+        /// <summary>
+        /// Gets the embed url for the video
+        /// </summary>
+        /// <returns>The <see cref="string"/></returns>
+        public string EmbedUrl()
+        {
+            string id = string.Empty;
+            switch (this.VideoProvider)
+            {
+                case VideoProvider.YouTube:
+                    id = this.VideoUrl.Substring(this.VideoUrl.LastIndexOf("=", StringComparison.Ordinal) + 1);
+                    break;
+
+                case VideoProvider.Vimeo:
+                    id = this.VideoUrl.Substring(this.VideoUrl.LastIndexOf("/", StringComparison.Ordinal) + 1);
+                    break;
+            }
+
+            return $"{this.VideoProvider.ToDisplay()}{id}";
+        }
     }
 }

@@ -6,7 +6,7 @@ At the moment the codebase is there but I'm lacking a proper demo. I'll get roun
 
 Eventually there will be a Nuget package for consuming the library.
 
- ## Features
+## Features
 
  - Three strong-typed Base-Class-Types Page, Component, NestedComponent
  - Strong-typed ContentHelper for document traversal.

@@ -322,10 +322,11 @@
     <Compile Include="ComponentModel\Search\UmbracoSearchMergedFieldAttribute.cs" />
     <Compile Include="ComponentModel\Search\UmbracoSearchCategoryAttribute.cs" />
     <Compile Include="ComponentModel\Search\ZoombracoSearchResolverAttribute.cs" />
+    <Compile Include="Controllers\ZoombracoEmbeddedResourceController.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="ComponentModel\Caching\UmbracoOutputCacheAttribute.cs" />
     <Compile Include="ComponentModel\Processors\NuPickerAttribute.cs" />
-    <Compile Include="Controllers\XmlSitemapController.cs" />
+    <Compile Include="Controllers\ZoombracoXmlSitemapController.cs" />
     <Compile Include="Controllers\ZoombracoApiController.cs" />
     <Compile Include="Models\DataTypes\RelatedLink\RelatedLink.cs" />
     <Compile Include="Models\DataTypes\RelatedLink\RelatedLinkBase.cs" />
@@ -336,6 +337,15 @@
     <Compile Include="Models\MediaTypes\ImageExtensions.cs" />
     <Compile Include="Models\Pocos\SitemapItem.cs" />
     <Compile Include="Models\Pocos\XmlSitemap.cs" />
+    <Compile Include="Resources\EmbeddedResourceHelper.cs" />
+    <Compile Include="Resources\EmbeddedResourceVirtualFile.cs" />
+    <Compile Include="Resources\EmbeddedResourceVirtualPathProvider.cs" />
+    <Compile Include="Resources\EmbeddedResourceWriter.cs" />
+    <Compile Include="Resources\IZoombracoEmbeddedResource.cs" />
+    <Compile Include="Resources\PropertyEditors\CharDisplayPropertyEditor\CharDisplayPreValueEditor.cs" />
+    <Compile Include="Resources\PropertyEditors\CharDisplayPropertyEditor\CharDisplayPropertyEditor.cs" />
+    <Compile Include="Resources\PropertyEditors\CharLimitPropertyEditor\CharLimitPreValueEditor.cs" />
+    <Compile Include="Resources\PropertyEditors\CharLimitPropertyEditor\CharLimitPropertyEditor.cs" />
     <Compile Include="RouteBuilder.cs" />
     <Compile Include="Search\SearchEngine.cs" />
     <Compile Include="Search\SearchRequest.cs" />
@@ -383,6 +393,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DevTrends.MvcDonutCaching.README.txt" />
+    <EmbeddedResource Include="Resources\PropertyEditors\CharDisplayPropertyEditor\chardisplayeditor.controller.js" />
+    <EmbeddedResource Include="Resources\PropertyEditors\CharDisplayPropertyEditor\chardisplayeditor.html" />
+    <EmbeddedResource Include="Resources\PropertyEditors\CharLimitPropertyEditor\charlimiteditor.controller.js" />
+    <EmbeddedResource Include="Resources\PropertyEditors\CharLimitPropertyEditor\charlimiteditor.html" />
+    <EmbeddedResource Include="Resources\PropertyEditors\Config\requirednumber.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

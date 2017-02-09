@@ -23,13 +23,20 @@ namespace Zoombraco
             routes.MapRoute(
             "XmlSitemapRAMMFAR",
             "sitemap.xml",
-            new { controller = "XmlSitemap", action = "XmlSitemap" });
+            new { controller = "ZoombracoXmlSitemap", action = "XmlSitemap" });
 
             // Non RAMMFAR version.
             routes.MapRoute(
             "XmlSitemap",
             "sitemap-xml",
-            new { controller = "XmlSitemap", action = "XmlSitemap" });
+            new { controller = "ZoombracoXmlSitemap", action = "XmlSitemap" });
+
+            // Embedded resources
+            routes.MapRoute(
+            ZoombracoConstants.EmbeddedResources.EmbeddedResourcesRoute,
+            "App_Plugins/Zoombraco/GetResource/{fileName}",
+            new { controller = "ZoombracoEmbeddedResource", action = "GetResource" },
+            new[] { "Zoombraco" });
         }
     }
 }

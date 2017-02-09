@@ -1,0 +1,11 @@
+<div ng-controller="Zoombraco.CharLimitEditorController">
+	<span ng-if="model.config.limit >= 100">
+    	<textarea ng-model="model.value" ng-change="limitChars()" rows="10" class="umb-editor umb-textarea textstring"></textarea>
+	</span>
+	<span ng-if="model.config.limit < 100">
+    	<input ng-model="model.value" ng-change="limitChars()" type="text" class="umb-editor umb-textstring textstring" />
+	</span>
+    <br/>
+    <br/>
+    <span ng-bind="info"></span>
+</div>

@@ -100,5 +100,32 @@ namespace Zoombraco
             /// </summary>
             public const int HighlightFragements = 3;
         }
+
+        /// <summary>
+        /// Constant values related to handling embedded resources.
+        /// </summary>
+        public static class EmbeddedResources
+        {
+            /// <summary>
+            /// The embedded resources route identifier.
+            /// </summary>
+            public const string EmbeddedResourcesRoute = "ZoombracoEmbeddedResources";
+
+            /// <summary>
+            /// The root location for all embedded resources.
+            /// </summary>
+            public const string ResourceRoot = "/App_Plugins/Zoombraco/GetResource/";
+
+            /// <summary>
+            /// The root namespace for embedded resources.
+            /// </summary>
+            public const string ResourceRootNameSpace = "Zoombraco.Umbraco.Resources.";
+
+            /// <summary>
+            /// The extension to add to embedded resources in order to ensure that the resource is not blocked
+            /// by client dependency security constraints.
+            /// </summary>
+            public const string ResourceExtension = ".umb";
+        }
     }
 }

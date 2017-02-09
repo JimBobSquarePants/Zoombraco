@@ -1,4 +1,4 @@
-﻿// <copyright file="XmlSitemapController.cs" company="James Jackson-South">
+﻿// <copyright file="ZoombracoXmlSitemapController.cs" company="James Jackson-South">
 // Copyright (c) James Jackson-South and contributors.
 // Licensed under the Apache License, Version 2.0.
 // </copyright>
@@ -25,14 +25,14 @@ namespace Zoombraco.Controllers
     /// <summary>
     /// The xml sitemap controller for rendering the XML sitemap.
     /// </summary>
-    public class XmlSitemapController : Controller
+    public class ZoombracoXmlSitemapController : Controller
     {
         private ContentHelper contentHelper;
 
         /// <summary>
         /// The xml sitemap event handler
         /// </summary>
-        /// <param name="sender">The sender <see cref="XmlSitemapController"/></param>
+        /// <param name="sender">The sender <see cref="ZoombracoXmlSitemapController"/></param>
         /// <param name="xmlSitemap">The <see cref="XmlSitemap"/></param>
         public delegate void ProcessXmlSitemapEventHandler(object sender, XmlSitemap xmlSitemap);
 
@@ -74,7 +74,7 @@ namespace Zoombraco.Controllers
             }
             catch (Exception ex)
             {
-                LogHelper.Error<XmlSitemapController>($"Cannot add node with id {home.Id} to the XML sitemap.", ex);
+                LogHelper.Error<ZoombracoXmlSitemapController>($"Cannot add node with id {home.Id} to the XML sitemap.", ex);
             }
 
             this.AddChildren(helper, home, viewModel);
@@ -118,7 +118,7 @@ namespace Zoombraco.Controllers
                 }
                 catch (Exception ex)
                 {
-                    LogHelper.Error<XmlSitemapController>($"Cannot add node with id {child.Id} to the XML sitemap.", ex);
+                    LogHelper.Error<ZoombracoXmlSitemapController>($"Cannot add node with id {child.Id} to the XML sitemap.", ex);
                 }
             }
         }

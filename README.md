@@ -5,7 +5,7 @@ This repository contains a lean boilerplate for rapidly developing fast, scalabl
 Imagine being able to write code like this to produce Umbraco sites...
 
 **Demo Strong-typed Model**
-```
+``` csharp
 /// <summary>
 /// The generic page document type
 /// </summary>
@@ -28,7 +28,7 @@ public class Generic : Page, IHeroPanel, INested
 ```
 
 **Demo Controller ActionResult**
-```
+``` csharp
 /// <summary>
 /// The Generic page controller
 /// </summary>
@@ -47,7 +47,7 @@ public class GenericController : ZoombracoController
 ```
 
 **Demo View**
-```
+``` csharp
 @using Zoombraco.Models
 @using Zoombraco.Views
 

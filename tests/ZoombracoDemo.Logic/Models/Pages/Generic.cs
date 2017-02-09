@@ -6,8 +6,9 @@
 namespace ZoombracoDemo.Logic.Models
 {
     using System.Collections.Generic;
-
+    using Zoombraco.ComponentModel.Search;
     using Zoombraco.Models;
+    using ZoombracoDemo.Logic.Search;
 
     /// <summary>
     /// The generic page document type
@@ -24,6 +25,8 @@ namespace ZoombracoDemo.Logic.Models
         public virtual RelatedLink HeroLink { get; set; }
 
         /// <inheritdoc />
+        [UmbracoSearchMergedField]
+        [NestedRichTextSearchResolver]
         public virtual IEnumerable<NestedComponent> NestedContent { get; set; }
     }
 }

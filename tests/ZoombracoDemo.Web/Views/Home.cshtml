@@ -1,4 +1,5 @@
 ﻿@using Zoombraco.Models
+@using Zoombraco.Search
 @using Zoombraco.Views
 
 @inherits ZoombracoViewPage<RenderPage<ZoombracoDemo.Logic.Models.Home>>
@@ -6,3 +7,15 @@
 
 @{ Html.RenderPartial("~/Views/Partials/Shared/_HeroPanel.cshtml", Model.Content);}
 <h1>@Model.Content.Name</h1>
+
+<h3>Search</h3>
+
+<p>Searching for the term "socket".</p>
+@{
+    IEnumerable<SearchMatch> result = SearchEngine.SearchSite("socket");
+}
+
+@foreach (SearchMatch match in result)
+{
+    @match.HighlightText
+}

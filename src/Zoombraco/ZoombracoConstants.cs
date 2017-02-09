@@ -47,5 +47,46 @@ namespace Zoombraco
             /// </summary>
             public const string ImageCdnRequestTimeout = "Zoombraco:ImageCdnRequestTimeout";
         }
+
+        /// <summary>
+        /// Constants for ensuring the correct values are used across search functionality.
+        /// </summary>
+        public static class SearchConstants
+        {
+            /// <summary>
+            /// The name of the Examine index to search within.
+            /// </summary>
+            public const string IndexerName = "ExternalIndexer";
+
+            /// <summary>
+            /// The name of the Examine searcher to use to perform searches.
+            /// </summary>
+            public const string SearcherName = "ExternalSearcher";
+
+            /// <summary>
+            /// The formatting template of the field that will contain merged data.
+            /// </summary>
+            public const string MergedDataFieldTemplate = "ZoombracoMergedData-{0}";
+
+            /// <summary>
+            /// The name of the field that will contain category specific information.
+            /// </summary>
+            public const string CategoryField = "ZoombracoCategories";
+
+            /// <summary>
+            /// The name of the field that will contain site specific information.
+            /// </summary>
+            public const string SiteField = "ZoombracoSite";
+
+            /// <summary>
+            /// The name of the field used by Examine to represent the "Name" property on a node.
+            /// </summary>
+            public const string NodeName = "nodeName";
+
+            /// <summary>
+            /// The maximum number of highlight fragments to display in a search result.
+            /// </summary>
+            public const int HighlightFragements = 3;
+        }
     }
 }

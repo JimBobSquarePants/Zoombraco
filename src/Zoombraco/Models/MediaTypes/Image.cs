@@ -7,12 +7,11 @@ namespace Zoombraco.Models
 {
     using System;
     using System.ComponentModel;
-
     using Our.Umbraco.Ditto;
     using Our.Umbraco.Ditto.ComponentModel.Attributes;
-
     using Umbraco.Core;
     using Umbraco.Web.Models;
+    using Zoombraco.ComponentModel.Search;
 
     /// <summary>
     /// Represents a single published image in the media section.
@@ -25,6 +24,7 @@ namespace Zoombraco.Models
         public virtual int Id { get; set; }
 
         /// <inheritdoc/>
+        [UmbracoSearchMergedField(ZoombracoConstants.SearchConstants.NodeName)]
         public virtual string Name { get; set; }
 
         /// <inheritdoc/>

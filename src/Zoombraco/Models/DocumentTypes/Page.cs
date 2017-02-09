@@ -8,13 +8,11 @@ namespace Zoombraco.Models
     using System;
     using System.Collections.Generic;
     using System.Web;
-
     using Our.Umbraco.Ditto;
     using Our.Umbraco.Ditto.ComponentModel.Attributes;
-
     using Umbraco.Core;
     using Umbraco.Web;
-
+    using Zoombraco.ComponentModel.Search;
     using Zoombraco.Extensions;
     using Zoombraco.Helpers;
 
@@ -23,7 +21,7 @@ namespace Zoombraco.Models
     /// </summary>
     [DittoLazy]
     [UmbracoPicker]
-    public class Page : IEntity, IMeta, IXmlSitemap, IUrl, INavigation
+    public class Page : IEntity, IMeta, IXmlSitemap, ISearchable, IUrl, INavigation
     {
         /// <summary>
         /// The content helper
@@ -34,6 +32,7 @@ namespace Zoombraco.Models
         public virtual int Id { get; set; }
 
         /// <inheritdoc/>
+        [UmbracoSearchMergedField(ZoombracoConstants.SearchConstants.NodeName)]
         public virtual string Name { get; set; }
 
         /// <inheritdoc/>
@@ -79,6 +78,10 @@ namespace Zoombraco.Models
         /// <inheritdoc/>
         [UmbracoProperty(Recursive = true)]
         public virtual bool ExcludeFromXmlSitemap { get; set; }
+
+        /// <inheritdoc/>
+        [UmbracoProperty(Recursive = true)]
+        public bool ExcludeFromSearchResults { get; set; }
 
         /// <inheritdoc/>
         [UmbracoProperty(Constants.Conventions.Content.UrlName, ZoombracoConstants.Content.Url)]

@@ -171,7 +171,7 @@ namespace Zoombraco.Helpers
         {
             // We want to get the current site only.
             return this.FilterAndParseCollection<T>(this.UmbracoHelper.TypedContentAtRoot()
-                .Where(p => p.UrlAbsolute().StartsWith(HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)))).FirstOrDefault();
+                       .Where(p => p.UrlAbsolute().StartsWith(HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)))).FirstOrDefault();
         }
 
         /// <summary>

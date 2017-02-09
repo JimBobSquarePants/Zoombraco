@@ -260,3 +260,9 @@ pip-log.txt
 # =========================
 **/App_Data/cache/
 Cached/
+
+# =========================
+# Plugins
+# =========================
+**/src/Zoombraco/App_Plugins
+**/tests/ZoombracoDemo.Logic/App_Plugins

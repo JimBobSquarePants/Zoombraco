@@ -3,9 +3,6 @@
 // Licensed under the Apache License, Version 2.0.
 // </copyright>
 
-using Umbraco.Core.Services;
-using Zoombraco.Models;
-
 namespace Zoombraco
 {
     using System;
@@ -20,6 +17,7 @@ namespace Zoombraco
     using Examine;
     using Examine.Providers;
     using ImageProcessor.Web.HttpModules;
+    using Our.Umbraco.Ditto;
     using Umbraco.Core;
     using Umbraco.Core.Cache;
     using Umbraco.Core.Logging;
@@ -29,9 +27,11 @@ namespace Zoombraco
     using Umbraco.Web.Mvc;
     using UmbracoExamine;
     using Zoombraco.Caching;
+    using Zoombraco.ComponentModel.Processors;
     using Zoombraco.ComponentModel.Search;
     using Zoombraco.Controllers;
     using Zoombraco.Helpers;
+    using Zoombraco.Models;
 
     /// <summary>
     /// Runs the handling code for appication specific events.
@@ -102,6 +102,9 @@ namespace Zoombraco
                 ContentHelper contentHelper = new ContentHelper(helper);
                 baseIndexProvider.GatheringNodeData += (sender, e) => this.GatheringNodeData(sender, e, helper, contentHelper, applicationContext);
             }
+
+            // Register the VortoPropertyAttribute as the default property processor so that any property can be made multilingual.
+            Ditto.RegisterDefaultProcessorType<VortoPropertyAttribute>();
         }
 
         /// <summary>

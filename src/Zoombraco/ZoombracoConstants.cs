@@ -5,11 +5,18 @@
 
 namespace Zoombraco
 {
+    using System.Reflection;
+
     /// <summary>
     /// Identifies framework-wide application constants.
     /// </summary>
     public static class ZoombracoConstants
     {
+        /// <summary>
+        /// The property bindings for mappable properties
+        /// </summary>
+        internal const BindingFlags MappablePropertiesBindingFlags = BindingFlags.Public | BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Static;
+
         /// <summary>
         /// Constant values related to content.
         /// </summary>
@@ -29,6 +36,11 @@ namespace Zoombraco
             /// The property alias for the content's "ExcludeFromSearchResults" property.
             /// </summary>
             public const string ExcludeFromSearchResults = "excludeFromSearchResults";
+
+            /// <summary>
+            /// Gets or sets the name of the culture cookie.
+            /// </summary>
+            public const string CultureCookieName = "zoombraco.culture";
         }
 
         /// <summary>

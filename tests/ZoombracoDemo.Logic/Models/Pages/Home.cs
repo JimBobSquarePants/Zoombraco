@@ -6,13 +6,14 @@
 namespace ZoombracoDemo.Logic.Models
 {
     using System.Collections.Generic;
-
+    using Zoombraco.ComponentModel.Search;
     using Zoombraco.Models;
+    using ZoombracoDemo.Logic.Search;
 
     /// <summary>
     /// Represents the home page document type
     /// </summary>
-    public class Home : Page, IHeroPanel
+    public class Home : Page, IHeroPanel, INested
     {
         /// <inheritdoc />
         public virtual IEnumerable<Image> HeroImages { get; set; }
@@ -22,5 +23,10 @@ namespace ZoombracoDemo.Logic.Models
 
         /// <inheritdoc />
         public virtual RelatedLink HeroLink { get; set; }
+
+        /// <inheritdoc />
+        [UmbracoSearchMergedField]
+        [NestedRichTextSearchResolver]
+        public virtual IEnumerable<NestedComponent> NestedContent { get; set; }
     }
 }

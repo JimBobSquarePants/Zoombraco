@@ -12,6 +12,7 @@ namespace Zoombraco.Models
     using Our.Umbraco.Ditto.ComponentModel.Attributes;
     using Umbraco.Core;
     using Umbraco.Web;
+    using Zoombraco.ComponentModel.Processors;
     using Zoombraco.ComponentModel.Search;
     using Zoombraco.Extensions;
     using Zoombraco.Helpers;
@@ -48,14 +49,15 @@ namespace Zoombraco.Models
         public virtual DateTime UpdateDate { get; set; }
 
         /// <inheritdoc/>
-        [UmbracoProperty(AltPropertyName = ZoombracoConstants.Content.Name)]
+        [VortoProperty(AltPropertyName = ZoombracoConstants.Content.Name)]
         public virtual string BrowserTitle { get; set; }
 
         /// <inheritdoc/>
+        [VortoProperty]
         public virtual string BrowserDescription { get; set; }
 
         /// <inheritdoc/>
-        [UmbracoProperty(AltPropertyName = ZoombracoConstants.Content.Name)]
+        [VortoProperty(AltPropertyName = ZoombracoConstants.Content.Name)]
         public virtual string OpenGraphTitle { get; set; }
 
         /// <inheritdoc/>

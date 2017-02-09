@@ -16,15 +16,6 @@ namespace Zoombraco.Search
     using Examine.Providers;
     using Examine.SearchCriteria;
     using Lucene.Net.Analysis;
-    using Lucene.Net.Analysis.AR;
-    using Lucene.Net.Analysis.BR;
-    using Lucene.Net.Analysis.CJK;
-    using Lucene.Net.Analysis.Cn;
-    using Lucene.Net.Analysis.Cz;
-    using Lucene.Net.Analysis.De;
-    using Lucene.Net.Analysis.Fr;
-    using Lucene.Net.Analysis.Nl;
-    using Lucene.Net.Analysis.Ru;
     using Lucene.Net.Analysis.Standard;
     using Lucene.Net.Highlight;
     using Lucene.Net.QueryParsers;
@@ -148,7 +139,7 @@ namespace Zoombraco.Search
                     {
                         foreach (CultureInfo culture in this.Cultures)
                         {
-                            Analyzer analyzer = GetAnalyserForCulture(culture);
+                            Analyzer analyzer = new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29);
                             string fieldName = string.Format(ZoombracoConstants.SearchConstants.MergedDataFieldTemplate, culture.Name);
                             string fieldResult = searchResult.Fields[fieldName];
                             this.AddSearchMatch(analyzer, formatter, searchResults, searchResponse, searchResult, fieldName, fieldResult);
@@ -165,102 +156,35 @@ namespace Zoombraco.Search
         /// <summary>
         /// Gets the query fragment scorer for highlighting.
         /// </summary>
+        /// <param name="analyzer">The analyzer which extracts index terms from text.</param>
         /// <param name="query">The query search term.</param>
         /// <param name="highlightField">The highlight field from which to create highlights.</param>
         /// <param name="searchResults">The search results.</param>
         /// <returns>The <see cref="QueryScorer"/></returns>
-        private static QueryScorer FragmentScorer(string query, string highlightField, SearchResults searchResults)
+        private QueryScorer FragmentScorer(Analyzer analyzer, string query, string highlightField, SearchResults searchResults)
         {
-            return new QueryScorer(GetLuceneQueryObject(query, highlightField).Rewrite(((IndexSearcher)searchResults.LuceneSearcher).GetIndexReader()));
+            return new QueryScorer(this.GetLuceneQueryObject(analyzer, query, highlightField).Rewrite(((IndexSearcher)searchResults.LuceneSearcher).GetIndexReader()));
         }
 
         /// <summary>
         /// Gets the Lucene query for creating highlight from.
         /// </summary>
+        /// <param name="analyzer">The analyzer which extracts index terms from text.</param>
         /// <param name="query">The query search term.</param>
         /// <param name="highlightField">The highlight field from which to create highlights.</param>
         /// <returns>The <see cref="Query"/></returns>
-        private static Query GetLuceneQueryObject(string query, string highlightField)
+        private Query GetLuceneQueryObject(Analyzer analyzer, string query, string highlightField)
         {
-            QueryParser parser = new QueryParser(Lucene.Net.Util.Version.LUCENE_29, highlightField, new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29));
+            QueryParser parser = new QueryParser(Lucene.Net.Util.Version.LUCENE_29, highlightField, analyzer);
 
             // Allow for wildcard fragments.
-            parser.SetMultiTermRewriteMethod(MultiTermQuery.SCORING_BOOLEAN_QUERY_REWRITE);
-
-            return parser.Parse($"{highlightField}:{string.Join(" ", query.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries).Select(w => w.Trim().MultipleCharacterWildcard().Value))}");
-        }
-
-        /// <summary>
-        /// Returns the correct analyser for the given culture or the <see cref="StandardAnalyzer"/> if no match is found.
-        /// </summary>
-        /// <param name="culture">The culture</param>
-        /// <returns>The <see cref="Analyzer"/></returns>
-        private static Analyzer GetAnalyserForCulture(CultureInfo culture)
-        {
-            // TODO: Some of these might be incorrect. I'm making a best guess based on the list
-            // here https://msdn.microsoft.com/en-us/library/ee825488(v=cs.20).aspx
-            switch (culture.Name)
+            if (this.UseWildcards)
             {
-                case "ar-DZ":
-                case "ar-BH":
-                case "ar-EG":
-                case "ar-IQ":
-                case "ar-JO":
-                case "ar-KW":
-                case "ar-LB":
-                case "ar-LY":
-                case "ar-MA":
-                case "ar-OM":
-                case "ar-QA":
-                case "ar-SA":
-                case "ar-SY":
-                case "ar-TN":
-                case "ar-AE":
-                case "ar-YE":
-                    return new ArabicAnalyzer(Lucene.Net.Util.Version.LUCENE_29);
-
-                case "cs-CZ":
-                    return new CzechAnalyzer();
-
-                case "de-AT":
-                case "de-DE":
-                case "de-LI":
-                case "de-LU":
-                case "de-CH":
-                    return new GermanAnalyzer();
-
-                case "fr-CA":
-                case "fr-FR":
-                case "fr-LU":
-                case "fr-MC":
-                case "fr-CH":
-                    return new FrenchAnalyzer();
-
-                case "ja-JP":
-                case "ko-KR":
-                    return new CJKAnalyzer();
-
-                case "nl-BE":
-                case "nl-NL":
-                    return new DutchAnalyzer();
-
-                case "pt-BR":
-                    return new BrazilianAnalyzer();
-
-                case "ru-RU":
-                    return new RussianAnalyzer();
-
-                case "zh-CN":
-                case "zh-HK":
-                case "zh-MO":
-                case "zh-SG":
-                case "zh-TW":
-                case "zh-CHS":
-                case "zh-CHT":
-                    return new ChineseAnalyzer();
+                parser.SetMultiTermRewriteMethod(MultiTermQuery.SCORING_BOOLEAN_QUERY_REWRITE);
+                return parser.Parse($"{highlightField}:{string.Join(" ", query.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries).Select(w => w.Trim().MultipleCharacterWildcard().Value))}");
             }
 
-            return new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29);
+            return parser.Parse($"{highlightField}:{query}");
         }
 
         /// <summary>
@@ -302,7 +226,7 @@ namespace Zoombraco.Search
         /// <returns>The <see cref="string"/></returns>
         private string GetHighlight(Analyzer analyzer, Formatter formatter, SearchResults searchResults, string fieldName, string fieldResult)
         {
-            Highlighter highlighter = new Highlighter(formatter, FragmentScorer(this.Query, fieldName, searchResults));
+            Highlighter highlighter = new Highlighter(formatter, this.FragmentScorer(analyzer, this.Query, fieldName, searchResults));
             using (StringReader reader = new StringReader(fieldResult))
             {
                 TokenStream tokenStream = analyzer.TokenStream(fieldName, reader);

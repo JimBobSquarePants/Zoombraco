@@ -6,6 +6,17 @@ At the moment the codebase is there but I'm lacking a proper demo. I'll get roun
 
 Eventually there will be a Nuget package for consuming the library.
 
+ ## Features
+
+ - Three strong-typed Base-Class-Types Page, Component, NestedComponent
+ - Strong-typed ContentHelper for document traversal.
+ - Base Controllers, Views
+ - Automatic mapping of Nested Content
+ - Metadata and automatic XML sitemap generation
+ - Language aware Metadata
+ - All properties can be made language aware and map automatically
+ - Faceted, language aware search engine with fragment highlighting
+
 ### Playing with the Solution
 
 Having a play around is encouraged, I'm always looking for feedback.

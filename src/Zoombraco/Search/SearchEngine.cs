@@ -18,21 +18,22 @@ namespace Zoombraco.Search
         /// Searches within the current site for the given query.
         /// </summary>
         /// <param name="query">The query containing information to search for.</param>
+        /// <param name="cultures">The collection of <see cref="CultureInfo"/>, if any, to restrict the search to.</param>
         /// <param name="useWildcards">Whether to use wildcards when searching.</param>
         /// <param name="categories">The categories, if any, to restrict a search to.</param>
-        /// <param name="cultures">The collection of <see cref="CultureInfo"/>, if any, to restrict the search to.</param>
         /// <param name="skip">The number of matches to skip.</param>
         /// <param name="take">The number of matches to take.</param>
         /// <returns>
         /// The <see cref="IEnumerable{SearchMatch}"/>.
         /// </returns>
-        public static IEnumerable<SearchMatch> SearchSite(string query, bool useWildcards = true, string[] categories = null, CultureInfo[] cultures = null, int skip = 0, int take = int.MaxValue)
+        public static SearchResponse SearchSite(string query, CultureInfo[] cultures = null, bool useWildcards = true, string[] categories = null, int skip = 0, int take = int.MaxValue)
         {
             SearchRequest request = new SearchRequest(new UmbracoHelper(UmbracoContext.Current))
             {
                 Query = query,
                 Skip = skip,
-                Take = take
+                Take = take,
+                UseWildcards = useWildcards
             };
 
             if (categories != null)
@@ -49,28 +50,29 @@ namespace Zoombraco.Search
             string rootId = UmbracoContext.Current.PublishedContentRequest.PublishedContent.Path.Split(',')[1];
 
             // Search results should match the current culture.
-            return request.Execute(rootId).SearchMatches;
+            return request.Execute(rootId);
         }
 
         /// <summary>
         /// Searches across multiple sites for the given query.
         /// </summary>
         /// <param name="query">The query containing information to search for.</param>
+        /// <param name="cultures">The collection of <see cref="CultureInfo"/>, if any, to restrict the search to.</param>
         /// <param name="useWildcards">Whether to use wildcards when searching.</param>
         /// <param name="categories">The categories, if any, to restrict a search to.</param>
-        /// <param name="cultures">The collection of <see cref="CultureInfo"/>, if any, to restrict the search to.</param>
         /// <param name="skip">The number of matches to skip.</param>
         /// <param name="take">The number of matches to take.</param>
         /// <returns>
         /// The <see cref="IEnumerable{SearchMatch}"/>.
         /// </returns>
-        public static IEnumerable<SearchMatch> SearchMultipleSites(string query, bool useWildcards = true, string[] categories = null, CultureInfo[] cultures = null, int skip = 0, int take = int.MaxValue)
+        public static SearchResponse SearchMultipleSites(string query, CultureInfo[] cultures = null, bool useWildcards = true, string[] categories = null, int skip = 0, int take = int.MaxValue)
         {
             SearchRequest request = new SearchRequest(new UmbracoHelper(UmbracoContext.Current))
             {
                 Query = query,
                 Skip = skip,
-                Take = take
+                Take = take,
+                UseWildcards = useWildcards
             };
 
             if (categories != null)
@@ -83,7 +85,7 @@ namespace Zoombraco.Search
                 request.Cultures = cultures;
             }
 
-            return request.Execute().SearchMatches;
+            return request.Execute();
         }
     }
 }

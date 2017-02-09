@@ -10,7 +10,7 @@ namespace Zoombraco.Search
     /// <summary>
     /// Contains the matches for a given search request.
     /// </summary>
-    internal class SearchResponse
+    public class SearchResponse
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchResponse"/> class.
@@ -21,7 +21,7 @@ namespace Zoombraco.Search
         }
 
         /// <summary>
-        /// Gets or sets the total number of search results that could have been returned for the <see cref="SearchRequest"/> executed.
+        /// Gets the total number of search results that could have been returned for the <see cref="SearchRequest"/> executed.
         /// </summary>
         public int TotalCount { get; internal set; }
 

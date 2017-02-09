@@ -177,6 +177,10 @@
       <HintPath>..\..\packages\Our.Umbraco.NestedContent.0.3.0\lib\net45\Our.Umbraco.NestedContent.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Our.Umbraco.Vorto, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Our.Umbraco.Vorto.1.5.3\lib\net45\Our.Umbraco.Vorto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
@@ -311,6 +315,15 @@
     <Content Include="App_Plugins\NestedContent\Views\nestedcontent.doctypepicker.html" />
     <Content Include="App_Plugins\NestedContent\Views\nestedcontent.editor.html" />
     <Content Include="App_Plugins\NestedContent\Views\nestedcontent.html" />
+    <Content Include="App_Plugins\Vorto\css\vorto.css" />
+    <Content Include="App_Plugins\Vorto\js\jquery.hoverIntent.minified.js" />
+    <Content Include="App_Plugins\Vorto\js\vorto.js" />
+    <Content Include="App_Plugins\Vorto\views\vorto.html" />
+    <Content Include="App_Plugins\Vorto\views\vorto.languagePicker.html" />
+    <Content Include="App_Plugins\Vorto\views\vorto.languageSourceRadioList.html" />
+    <Content Include="App_Plugins\Vorto\views\vorto.mandatoryBehaviourPicker.html" />
+    <Content Include="App_Plugins\Vorto\views\vorto.propertyEditorPicker.html" />
+    <Content Include="App_Plugins\Vorto\views\vorto.rtlBehaviourPicker.html" />
     <Content Include="css\**" />
     <Content Include="scripts\**" />
     <Content Include="packages.config" />

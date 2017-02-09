@@ -46,15 +46,15 @@ public class GenericController : ZoombracoController
 }
 ```
 
-**Zoombraco** will let you do that and a lot more. The boilerplate is designed to be lean yet exceptionally powerful and flexible allowing you to create your own websites on a firm foundation.
+**Zoombraco** will let you do that and a lot more. The boilerplate is designed to be lean yet exceptionally powerful and flexible allowing you to create your own websites on a firm foundation. **Zoombraco** lets you concentrate on the fun features of your site while enabling you to maintain a strong MVC architecture.
 
 ## Features
 
- - Three strong-typed Base-Class-Types Page, Component, NestedComponent
- - Strong-typed ContentHelper for document traversal.
+ - Three strong-typed Base-Class-Types `Page`, `Component`, `NestedComponent`
  - Base Controllers, Views
+ - Strong-typed `ContentHelper` for document traversal.
  - Automatic mapping of Nested Content
- - Metadata and automatic XML sitemap generation
+ - Automatic XML sitemap generation
  - Language aware Metadata
  - All properties can be made language aware and map automatically
  - Faceted, language aware search engine with fragment highlighting

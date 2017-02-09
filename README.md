@@ -46,6 +46,21 @@ public class GenericController : ZoombracoController
 }
 ```
 
+**Demo View**
+```
+@using Zoombraco.Models
+@using Zoombraco.Views
+
+@inherits ZoombracoViewPage<RenderPage<ZoombracoDemo.Logic.Models.Generic>>
+
+@{ Html.RenderPartial("~/Views/Partials/Shared/_HeroPanel.cshtml", Model.Content);}
+
+<h1>@Model.Content.Name</h1>
+
+<h2>Nested Content</h2>
+@{ Html.RenderPartial("~/Views/Partials/Shared/_NestedContent.cshtml", Model.Content);}
+```
+
 **Zoombraco** will let you do that and a lot more. The boilerplate is designed to be lean yet exceptionally powerful and flexible allowing you to create your own websites on a firm foundation. **Zoombraco** lets you concentrate on the fun features of your site while enabling you to maintain a strong MVC architecture.
 
 ## Features

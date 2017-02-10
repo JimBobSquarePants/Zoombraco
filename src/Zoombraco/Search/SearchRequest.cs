@@ -13,7 +13,6 @@ namespace Zoombraco.Search
     using Examine;
     using Examine.LuceneEngine;
     using Examine.LuceneEngine.SearchCriteria;
-    using Examine.Providers;
     using Examine.SearchCriteria;
     using Lucene.Net.Analysis;
     using Lucene.Net.Analysis.Standard;
@@ -21,6 +20,7 @@ namespace Zoombraco.Search
     using Lucene.Net.QueryParsers;
     using Lucene.Net.Search;
     using Umbraco.Web;
+    using UmbracoExamine;
 
     /// <summary>
     /// Allows the creation and execution of searches against the Examine index.
@@ -80,7 +80,11 @@ namespace Zoombraco.Search
         public SearchResponse Execute(string rootId = "")
         {
             SearchResponse searchResponse = new SearchResponse();
-            BaseSearchProvider searchProvider = ExamineManager.Instance.SearchProviderCollection[ZoombracoConstants.SearchConstants.SearcherName];
+            UmbracoExamineSearcher searchProvider = (UmbracoExamineSearcher)ExamineManager.Instance.SearchProviderCollection[ZoombracoConstants.Search.SearcherName];
+            Analyzer analyzer = searchProvider.IndexingAnalyzer;
+
+            // Wildcards are only supported using the languages using the standard analyzer.
+            this.UseWildcards = this.UseWildcards && typeof(StandardAnalyzer) == analyzer.GetType();
 
             IBooleanOperation searchCriteria = searchProvider.CreateSearchCriteria().OrderBy(string.Empty);
 
@@ -89,7 +93,7 @@ namespace Zoombraco.Search
                 string[] mergedFields = new string[this.Cultures.Length];
                 for (int i = 0; i < this.Cultures.Length; i++)
                 {
-                    mergedFields[i] = string.Format(ZoombracoConstants.SearchConstants.MergedDataFieldTemplate, this.Cultures[i].Name);
+                    mergedFields[i] = string.Format(ZoombracoConstants.Search.MergedDataFieldTemplate, this.Cultures[i].Name);
                 }
 
                 if (this.UseWildcards)
@@ -111,12 +115,12 @@ namespace Zoombraco.Search
 
             if (this.Categories != null && this.Categories.Any())
             {
-                searchCriteria.And().Field(ZoombracoConstants.SearchConstants.CategoryField, string.Join(" ", this.Categories));
+                searchCriteria.And().Field(ZoombracoConstants.Search.CategoryField, string.Join(" ", this.Categories));
             }
 
             if (!string.IsNullOrWhiteSpace(rootId))
             {
-                searchCriteria.And().Field(ZoombracoConstants.SearchConstants.SiteField, rootId);
+                searchCriteria.And().Field(ZoombracoConstants.Search.SiteField, rootId);
             }
 
             if (searchCriteria != null)
@@ -139,8 +143,7 @@ namespace Zoombraco.Search
                     {
                         foreach (CultureInfo culture in this.Cultures)
                         {
-                            Analyzer analyzer = new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29);
-                            string fieldName = string.Format(ZoombracoConstants.SearchConstants.MergedDataFieldTemplate, culture.Name);
+                            string fieldName = string.Format(ZoombracoConstants.Search.MergedDataFieldTemplate, culture.Name);
                             string fieldResult = searchResult.Fields[fieldName];
                             this.AddSearchMatch(analyzer, formatter, searchResults, searchResponse, searchResult, fieldName, fieldResult);
                         }
@@ -201,7 +204,7 @@ namespace Zoombraco.Search
         {
             string highlight = this.GetHighlight(analyzer, formatter, (SearchResults)searchResults, fieldName, fieldResult);
 
-            string[] categories = searchResult.Fields[ZoombracoConstants.SearchConstants.CategoryField]?.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries) ?? new string[0];
+            string[] categories = searchResult.Fields[ZoombracoConstants.Search.CategoryField]?.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries) ?? new string[0];
 
             switch (searchResult.Fields["__IndexType"])
             {
@@ -231,7 +234,7 @@ namespace Zoombraco.Search
             {
                 TokenStream tokenStream = analyzer.TokenStream(fieldName, reader);
 
-                return highlighter.GetBestFragments(tokenStream, fieldResult, ZoombracoConstants.SearchConstants.HighlightFragements, "...");
+                return highlighter.GetBestFragments(tokenStream, fieldResult, ZoombracoConstants.Search.HighlightFragements, "...");
             }
         }
     }

@@ -351,6 +351,7 @@
     <Compile Include="Search\SearchRequest.cs" />
     <Compile Include="Search\SearchResponse.cs" />
     <Compile Include="Search\SearchMatch.cs" />
+    <Compile Include="Search\ZoombracoMultiLingualAnalyzer.cs" />
     <Compile Include="ZoombracoApplicationEvents.cs" />
     <Compile Include="ZoombracoGlobal.cs" />
     <Compile Include="ZoombracoConfiguration.cs" />

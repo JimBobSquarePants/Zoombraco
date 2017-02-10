@@ -94,14 +94,22 @@ namespace Zoombraco
             ImageProcessingModule.OnPostProcessing += (s, e) => { ZoombracoApplicationCache.RemoveItem(e.Context.Request.Unvalidated.RawUrl); };
 
             // Assign indexer for full text searching.
-            BaseIndexProvider baseIndexProvider = ExamineManager.Instance.IndexProviderCollection[ZoombracoConstants.SearchConstants.IndexerName];
+            UmbracoContentIndexer indexProvider = ExamineManager.Instance.IndexProviderCollection[ZoombracoConstants.Search.IndexerName] as UmbracoContentIndexer;
+            UmbracoExamineSearcher searchProvider = ExamineManager.Instance.SearchProviderCollection[ZoombracoConstants.Search.SearcherName] as UmbracoExamineSearcher;
 
-            if (baseIndexProvider != null)
+            if (indexProvider == null)
             {
-                UmbracoHelper helper = new UmbracoHelper(UmbracoContext.Current);
-                ContentHelper contentHelper = new ContentHelper(helper);
-                baseIndexProvider.GatheringNodeData += (sender, e) => this.GatheringNodeData(sender, e, helper, contentHelper, applicationContext);
+                throw new ArgumentOutOfRangeException($"{ZoombracoConstants.Search.IndexerName} is missing. Please check the ExamineSettings.config file.");
             }
+
+            if (searchProvider == null)
+            {
+                throw new ArgumentOutOfRangeException($"{ZoombracoConstants.Search.SearcherName} is missing. Please check the ExamineSettings.config file.");
+            }
+
+            UmbracoHelper helper = new UmbracoHelper(UmbracoContext.Current);
+            ContentHelper contentHelper = new ContentHelper(helper);
+            indexProvider.GatheringNodeData += (sender, e) => this.GatheringNodeData(sender, e, helper, contentHelper, applicationContext);
 
             // Register the VortoPropertyAttribute as the default property processor so that any property can be made multilingual.
             Ditto.RegisterDefaultProcessorType<VortoPropertyAttribute>();
@@ -252,11 +260,11 @@ namespace Zoombraco
                     }
 
                     // Now add the site, categories, and merged data.
-                    e.Fields.Add(ZoombracoConstants.SearchConstants.SiteField, e.Fields["path"].Replace(",", " "));
-                    e.Fields[ZoombracoConstants.SearchConstants.CategoryField] = categoryStringBuilder.ToString().Trim();
+                    e.Fields.Add(ZoombracoConstants.Search.SiteField, e.Fields["path"].Replace(",", " "));
+                    e.Fields[ZoombracoConstants.Search.CategoryField] = categoryStringBuilder.ToString().Trim();
                     for (int i = 0; i < languages.Length; i++)
                     {
-                        e.Fields[string.Format(ZoombracoConstants.SearchConstants.MergedDataFieldTemplate, languages[i].CultureInfo.Name)] = mergedDataStringBuilders[i].ToString().Trim();
+                        e.Fields[string.Format(ZoombracoConstants.Search.MergedDataFieldTemplate, languages[i].CultureInfo.Name)] = mergedDataStringBuilders[i].ToString().Trim();
                     }
                 }
             }

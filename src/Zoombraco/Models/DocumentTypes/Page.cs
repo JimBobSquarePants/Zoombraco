@@ -33,7 +33,7 @@ namespace Zoombraco.Models
         public virtual int Id { get; set; }
 
         /// <inheritdoc/>
-        [UmbracoSearchMergedField(ZoombracoConstants.SearchConstants.NodeName)]
+        [UmbracoSearchMergedField(ZoombracoConstants.Search.NodeName)]
         public virtual string Name { get; set; }
 
         /// <inheritdoc/>

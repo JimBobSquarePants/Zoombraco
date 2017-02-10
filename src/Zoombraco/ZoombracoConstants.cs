@@ -63,7 +63,7 @@ namespace Zoombraco
         /// <summary>
         /// Constants for ensuring the correct values are used across search functionality.
         /// </summary>
-        public static class SearchConstants
+        public static class Search
         {
             /// <summary>
             /// The name of the Examine index to search within.

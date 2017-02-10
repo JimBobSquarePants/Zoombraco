@@ -19,14 +19,14 @@ namespace Zoombraco.Search
         /// </summary>
         /// <param name="query">The query containing information to search for.</param>
         /// <param name="cultures">The collection of <see cref="CultureInfo"/>, if any, to restrict the search to.</param>
-        /// <param name="useWildcards">Whether to use wildcards when searching.</param>
+        /// <param name="useWildcards">Whether to use wildcards when searching. Wildcards are only supported using the languages using the standard analyzer.</param>
         /// <param name="categories">The categories, if any, to restrict a search to.</param>
         /// <param name="skip">The number of matches to skip.</param>
         /// <param name="take">The number of matches to take.</param>
         /// <returns>
         /// The <see cref="IEnumerable{SearchMatch}"/>.
         /// </returns>
-        public static SearchResponse SearchSite(string query, CultureInfo[] cultures = null, bool useWildcards = true, string[] categories = null, int skip = 0, int take = int.MaxValue)
+        public static SearchResponse SearchSite(string query, CultureInfo[] cultures = null, bool useWildcards = false, string[] categories = null, int skip = 0, int take = int.MaxValue)
         {
             SearchRequest request = new SearchRequest(new UmbracoHelper(UmbracoContext.Current))
             {
@@ -58,14 +58,14 @@ namespace Zoombraco.Search
         /// </summary>
         /// <param name="query">The query containing information to search for.</param>
         /// <param name="cultures">The collection of <see cref="CultureInfo"/>, if any, to restrict the search to.</param>
-        /// <param name="useWildcards">Whether to use wildcards when searching.</param>
+        /// <param name="useWildcards">Whether to use wildcards when searching. Wildcards are only supported using the languages using the standard analyzer.</param>
         /// <param name="categories">The categories, if any, to restrict a search to.</param>
         /// <param name="skip">The number of matches to skip.</param>
         /// <param name="take">The number of matches to take.</param>
         /// <returns>
         /// The <see cref="IEnumerable{SearchMatch}"/>.
         /// </returns>
-        public static SearchResponse SearchMultipleSites(string query, CultureInfo[] cultures = null, bool useWildcards = true, string[] categories = null, int skip = 0, int take = int.MaxValue)
+        public static SearchResponse SearchMultipleSites(string query, CultureInfo[] cultures = null, bool useWildcards = false, string[] categories = null, int skip = 0, int take = int.MaxValue)
         {
             SearchRequest request = new SearchRequest(new UmbracoHelper(UmbracoContext.Current))
             {

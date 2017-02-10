@@ -14,7 +14,7 @@
 
     <p>Searching for the term "socket" against all cultures</p>
     @{
-        SearchResponse result = SearchEngine.SearchSite("socket", null, false);
+        SearchResponse result = SearchEngine.SearchSite("socket");
     }
     <p>Total Matches: @result.TotalCount</p>
 
@@ -36,17 +36,19 @@
         <a href="@match.Url">@match.HighlightText</a>
     }
 
+
     <p>Searching for the term "تأمين" against culture <code>ar-AE</code></p>
     @{
         SearchResponse result3 = SearchEngine.SearchSite("تأمين", new[] { new CultureInfo("ar-AE") });
     }
     <p>Total Matches: @result3.TotalCount</p>
 
-
-    @foreach (SearchMatch match in result3.SearchMatches)
-    {
-        <a href="@match.Url">@match.HighlightText</a>
-    }
+    <div dir="rtl">
+        @foreach (SearchMatch match in result3.SearchMatches)
+        {
+            <a href="@match.Url">@match.HighlightText</a>
+        }
+    </div>
 </section>
 <h2>Vorto Nested Content</h2>
 @{ Html.RenderPartial("~/Views/Partials/Shared/_NestedContent.cshtml", Model.Content);}

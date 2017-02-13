@@ -15,7 +15,6 @@ namespace Zoombraco
     using System.Web.Routing;
     using DevTrends.MvcDonutCaching;
     using Examine;
-    using Examine.Providers;
     using ImageProcessor.Web.HttpModules;
     using Our.Umbraco.Ditto;
     using Umbraco.Core;

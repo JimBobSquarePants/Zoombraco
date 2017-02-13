@@ -9,7 +9,6 @@ namespace ZoombracoDemo.Logic.Search
     using System.Text;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
-    using Our.Umbraco.Vorto.Models;
     using Umbraco.Core;
     using Zoombraco.ComponentModel.Search;
     using ZoombracoDemo.Logic.Models;
@@ -19,33 +18,22 @@ namespace ZoombracoDemo.Logic.Search
     /// </summary>
     public class NestedRichTextSearchResolverAttribute : ZoombracoSearchResolverAttribute
     {
-        /// <summary>
-        /// Gets or sets the property alias for identifying the rich text property.
-        /// </summary>
-        public string Alias { get; set; } = nameof(NestedRichText.BodyText);
-
         /// <inheritdoc/>
         public override string ResolveValue()
         {
-            string result = string.Empty;
-            try
+            // Vorto nested values
+            if (this.RawVortoValue != null)
             {
-                // Standard nested values
-                List<object> rawValue = JsonConvert.DeserializeObject<List<object>>(this.RawValue);
-                result = this.GetNestedContentRichText(rawValue);
-            }
-            catch
-            {
-                // Vorto nested values
-                VortoValue rawValue = JsonConvert.DeserializeObject<VortoValue>(this.RawValue);
-                if (rawValue.Values.ContainsKey(this.Culture.Name))
+                if (this.RawVortoValue.Values.ContainsKey(this.Culture.Name))
                 {
-                    List<object> nestedValue = JsonConvert.DeserializeObject<List<object>>(rawValue.Values[this.Culture.Name].ToString());
-                    result = this.GetNestedContentRichText(nestedValue);
+                    List<object> nestedValue = JsonConvert.DeserializeObject<List<object>>(this.RawVortoValue.Values[this.Culture.Name].ToString());
+                    return this.GetNestedContentRichText(nestedValue);
                 }
             }
 
-            return result;
+            // Standard nested values
+            List<object> rawValue = JsonConvert.DeserializeObject<List<object>>(this.RawValue);
+            return this.GetNestedContentRichText(rawValue);
         }
 
         /// <summary>
@@ -79,7 +67,7 @@ namespace ZoombracoDemo.Logic.Search
                 // TODO: Get rich text editors for now. Think of something more generic later.
                 if (contentTypeAlias.InvariantEquals(nameof(NestedRichText)))
                 {
-                    JToken contentTypeAliasProperty = item[this.Alias.ToFirstLowerInvariant()];
+                    JToken contentTypeAliasProperty = item[this.PropertyAlias];
                     sb.Append(contentTypeAliasProperty?.ToObject<string>());
                 }
             }

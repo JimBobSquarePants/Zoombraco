@@ -8,6 +8,9 @@ namespace Zoombraco.ComponentModel.Search
     using System;
     using System.Globalization;
     using System.Reflection;
+    using Newtonsoft.Json;
+    using Our.Umbraco.Vorto.Extensions;
+    using Our.Umbraco.Vorto.Models;
     using Umbraco.Core.Models;
 
     /// <summary>
@@ -15,6 +18,16 @@ namespace Zoombraco.ComponentModel.Search
     /// </summary>
     public abstract class ZoombracoSearchResolverAttribute : Attribute
     {
+        /// <summary>
+        /// Gets the alias of the property.
+        /// </summary>
+        public string PropertyAlias { get; private set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this property is recursive.
+        /// </summary>
+        public bool Recursive { get; set; }
+
         /// <summary>
         /// Gets the content to resolve the value for.
         /// </summary>
@@ -29,6 +42,11 @@ namespace Zoombraco.ComponentModel.Search
         /// Gets the raw value.
         /// </summary>
         public string RawValue { get; private set; }
+
+        /// <summary>
+        /// Gets the raw vorto value or <code>null</code> if there isn't one.
+        /// </summary>
+        public VortoValue RawVortoValue { get; private set; }
 
         /// <summary>
         /// Gets the culture object.
@@ -48,19 +66,31 @@ namespace Zoombraco.ComponentModel.Search
         /// </summary>
         /// <param name="content">The <see cref="IPublishedContent"/>to resolve the value for.</param>
         /// <param name="property">The <see cref="PropertyInfo"/> to resolve the value for.</param>
+        /// <param name="propertyAlias">The content property alias to resolve the value for.</param>
         /// <param name="rawValue">The raw property value from Umbraco.</param>
         /// <param name="culture"> The <see cref="CultureInfo"/> to help parse values with the correct culture.</param>
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        internal virtual string ResolveValue(IPublishedContent content, PropertyInfo property, string rawValue, CultureInfo culture)
+        internal virtual string ResolveValue(IPublishedContent content, PropertyInfo property, string propertyAlias, string rawValue, CultureInfo culture)
         {
             this.Content = content;
             this.RawValue = rawValue;
             this.Culture = culture;
             this.Property = property;
+            this.PropertyAlias = propertyAlias;
+            this.RawVortoValue = this.HasVortoValue() ? JsonConvert.DeserializeObject<VortoValue>(this.RawValue) : null;
 
             return this.ResolveValue();
+        }
+
+        /// <summary>
+        /// Returns a value indicating whether this property has a vorto value.
+        /// </summary>
+        /// <returns>The <see cref="bool"/></returns>
+        private bool HasVortoValue()
+        {
+            return this.Content.HasVortoValue(this.PropertyAlias, this.Culture.Name, this.Recursive);
         }
     }
 }

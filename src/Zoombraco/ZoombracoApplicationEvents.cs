@@ -224,7 +224,7 @@ namespace Zoombraco
                                     // Resolve each value and append to the language stringbuilder.
                                     foreach (ZoombracoSearchResolverAttribute attribute in resolverAttributes)
                                     {
-                                        string value = attribute.ResolveValue(content, property, field.Value, languages[i].CultureInfo);
+                                        string value = attribute.ResolveValue(content, property, field.Key, field.Value, languages[i].CultureInfo);
                                         if (!string.IsNullOrWhiteSpace(value))
                                         {
                                             mergedDataStringBuilders[i].AppendFormat(" {0} ", helper.StripHtml(value, null));

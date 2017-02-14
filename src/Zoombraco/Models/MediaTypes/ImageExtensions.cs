@@ -95,6 +95,8 @@ namespace Zoombraco.Models
                 return GetCropUrl(image, alias, useCropDimensions, useFocalPoint, quality, parameters);
             }
 
+            // Piece together the full qualified url. We use this to make a head requests that ImageProcessor.Web will intercept and
+            // route to the correct location. We'll cache that for subsequent requests.
             string domain = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
             string cropUrl = GetCropUrl(image, alias, useCropDimensions, useFocalPoint, quality, parameters);
             string key = $"{domain}{cropUrl}";
@@ -102,7 +104,7 @@ namespace Zoombraco.Models
             int timeout = ZoombracoConfiguration.Instance.ImageCdnRequestTimeout;
 
             // We don't want timeouts or errors causing constant slowdown of the page rendering so we always cache either the CDN or non CDN result.
-            // We do, however log extensivly so that we can see why things are going wrong.
+            // We do, however log extensively so that we can see why things are going wrong.
             return (string)ZoombracoApplicationCache.GetOrAddItem(
                 key,
                 () =>

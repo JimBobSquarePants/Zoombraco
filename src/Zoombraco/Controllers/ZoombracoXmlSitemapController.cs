@@ -28,6 +28,7 @@ namespace Zoombraco.Controllers
     public class ZoombracoXmlSitemapController : Controller
     {
         /// <summary>
+        /// The content helper for content traversal.
         /// </summary>
         private ContentHelper contentHelper;
 

@@ -115,6 +115,7 @@ namespace Zoombraco.Models
                         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(key);
                         request.Method = "HEAD";
                         request.Timeout = timeout;
+
                         response = (HttpWebResponse)request.GetResponse();
                         HttpStatusCode responseCode = response.StatusCode;
                         if (responseCode == HttpStatusCode.OK)
@@ -124,16 +125,24 @@ namespace Zoombraco.Models
                     }
                     catch (WebException ex)
                     {
-                        // A 304 is not an error
+                        // If you are testing against localhost then this will happen.
+                        if (ex.Response == null)
+                        {
+                            if (ex.Status == WebExceptionStatus.Timeout)
+                            {
+                                // Warn but about the timeout.
+                                LogHelper.Warn<Image>($"CDN url request for {key} timed out. Consider adjusting the {ZoombracoConstants.Configuration.ImageCdnRequestTimeout} setting in the Web.Config.");
+                            }
+
+                            return GetCropUrl(image, alias, useCropDimensions, useFocalPoint, quality, parameters);
+                        }
+
+                        // ImageProcessor.Web will handle returning a response from the cache catering for different
+                        // error codes from the cache providers. We'll just check for a url.
                         response = (HttpWebResponse)ex.Response;
-                        if (response.StatusCode == HttpStatusCode.NotModified)
+                        if (response.ResponseUri != null)
                         {
                             result = response.ResponseUri.AbsoluteUri;
-                        }
-                        else if (ex.Status == WebExceptionStatus.Timeout)
-                        {
-                            // Warn but about the timeout.
-                            LogHelper.Warn<Image>($"CDN url request for {key} timed out. Consider adjusting the {ZoombracoConstants.Configuration.ImageCdnRequestTimeout} setting in the Web.Config.");
                         }
                         else
                         {

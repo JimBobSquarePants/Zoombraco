@@ -51,13 +51,19 @@ namespace Zoombraco
             int duration;
             if (int.TryParse(WebConfigurationManager.AppSettings[ZoombracoConstants.Configuration.OutputCacheDuration], out duration))
             {
-                this.OutputCacheDuration = duration;
+                if (duration > 0)
+                {
+                    this.OutputCacheDuration = duration;
+                }
             }
 
             int timeout;
             if (int.TryParse(WebConfigurationManager.AppSettings[ZoombracoConstants.Configuration.ImageCdnRequestTimeout], out timeout))
             {
-                this.ImageCdnRequestTimeout = timeout;
+                if (timeout > 0)
+                {
+                    this.ImageCdnRequestTimeout = timeout;
+                }
             }
         }
     }

@@ -74,6 +74,7 @@ public class GenericController : ZoombracoController
  - All properties can be made language aware and map automatically
  - Faceted, language aware search engine with fragment highlighting
  - Multitentant aware codebase
+ - Image CDN url generation.
 
 ### Consuming the Solution
 

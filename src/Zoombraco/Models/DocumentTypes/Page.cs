@@ -9,7 +9,6 @@ namespace Zoombraco.Models
     using System.Collections.Generic;
     using System.Web;
     using Our.Umbraco.Ditto;
-    using Our.Umbraco.Ditto.ComponentModel.Attributes;
     using Umbraco.Core;
     using Umbraco.Web;
     using Zoombraco.ComponentModel.Processors;

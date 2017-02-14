@@ -8,7 +8,6 @@ namespace Zoombraco.Models
     using System;
     using System.ComponentModel;
     using Our.Umbraco.Ditto;
-    using Our.Umbraco.Ditto.ComponentModel.Attributes;
     using Umbraco.Core;
     using Umbraco.Web.Models;
     using Zoombraco.ComponentModel.Search;

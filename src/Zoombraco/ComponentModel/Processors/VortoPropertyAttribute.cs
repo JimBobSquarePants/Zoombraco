@@ -33,18 +33,28 @@ namespace Zoombraco.ComponentModel.Processors
                 }
             }
 
+            // First parse the culture.
             HttpCookie languageCookie = HttpContext.Current.Request.Cookies[ZoombracoConstants.Content.CultureCookieName];
             string culture = languageCookie?.Value;
             string fallbackCulture = string.IsNullOrWhiteSpace(this.FallBackCultureName)
                 ? this.Context.Culture.Name
                 : this.FallBackCultureName;
 
+            // Now check for a value. We check vorto values first then non-vorto fallbacks.
             IPublishedContent content = this.Context.Content;
-            object result = content.GetVortoValue(umbracoPropertyName, culture, this.Recursive, null, fallbackCulture);
+            object result = null;
+
+            if (content.HasVortoValue(umbracoPropertyName, culture, this.Recursive, fallbackCulture))
+            {
+                result = content.GetVortoValue(umbracoPropertyName, culture, this.Recursive, null, fallbackCulture);
+            }
 
             if (result == null && !string.IsNullOrWhiteSpace(this.AltPropertyName))
             {
-                result = content.GetVortoValue(this.AltPropertyName, culture, this.Recursive, null, fallbackCulture);
+                umbracoPropertyName = this.AltPropertyName;
+                result = content.HasVortoValue(umbracoPropertyName, culture, this.Recursive, fallbackCulture)
+                    ? content.GetVortoValue(umbracoPropertyName, culture, this.Recursive, null, fallbackCulture)
+                    : this.GetPropertyValue(content, umbracoPropertyName, this.Recursive);
             }
 
             return result ?? base.ProcessValue();

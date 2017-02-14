@@ -6,9 +6,7 @@
 namespace Zoombraco.Models
 {
     using System;
-
     using Our.Umbraco.Ditto;
-    using Our.Umbraco.Ditto.ComponentModel.Attributes;
 
     /// <summary>
     /// Represents a single published component in the content section.

@@ -393,7 +393,6 @@
     <Content Include="Config\FileSystemProviders.config" />
     <Content Include="Config\ExamineSettings.config" />
     <Content Include="Views\Partials\Shared\_Meta.cshtml" />
-    <Content Include="Views\Site.cshtml" />
     <Content Include="Views\Themed.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home.cshtml" />
@@ -435,6 +434,7 @@
     <Content Include="Config\BaseRestExtensions.config" />
     <Content Include="Config\applications.config" />
     <Content Include="Config\404handlers.config" />
+    <Content Include="Views\Zoombraco.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

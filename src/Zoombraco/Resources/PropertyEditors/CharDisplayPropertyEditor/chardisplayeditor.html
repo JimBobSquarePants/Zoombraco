@@ -2,7 +2,7 @@
 	<span ng-if="model.config.multiple == 1">
     	<textarea ng-model="model.value" ng-change="limitChars()" rows="10" class="umb-editor umb-textarea textstring"></textarea>
 	</span>
-    <span ng-if="model.config.multiple == 0">
+    <span ng-if="model.config.multiple != 1">
     	<input ng-model="model.value" ng-change="limitChars()" type="text" class="umb-editor umb-textstring textstring" />
 	</span>
     <br/>

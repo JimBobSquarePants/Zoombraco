@@ -14,10 +14,18 @@
         <meta name="description" content="@description" />
     }
 
-    <title>@content.BrowserTitle</title>
+    // Format the title correctly based on options.
+    // Pipe is used for better SEO due to pixel width.
+    string browserTitle = !string.IsNullOrWhiteSpace(content.BrowserWebsiteTitle)
+        ? content.SwitchTitleOrder.HasValue && content.SwitchTitleOrder.Value
+            ? string.Format("{0} | {1}", content.BrowserWebsiteTitle, content.BrowserPageTitle)
+            : string.Format("{0} | {1}", content.BrowserPageTitle, content.BrowserWebsiteTitle)
+        : content.BrowserPageTitle;
 
-    //Open Graph Meta Data. See http://ogp.me/ for more information.
-    string ogTitle = content.OpenGraphTitle;
+    <title>@browserTitle</title>
+
+    // Open Graph Meta Data. See http://ogp.me/ for more information.
+            string ogTitle = content.OpenGraphTitle;
     string ogType = content.OpenGraphType.ToDisplay();
     string ogUrl = content.OpenGraphUrl;
     <meta property="og:url" content="@ogUrl" />

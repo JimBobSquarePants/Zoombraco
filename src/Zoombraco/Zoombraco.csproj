@@ -317,6 +317,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Caching\ZoombracoApplicationCache.cs" />
+    <Compile Include="ComponentModel\Processors\PublishedPickerAttribute.cs" />
     <Compile Include="ComponentModel\Processors\VortoPropertyAttribute.cs" />
     <Compile Include="ComponentModel\PropertyValueConverters\RelatedLink\RelatedLinksPropertyConverter.cs" />
     <Compile Include="ComponentModel\Search\UmbracoSearchMergedFieldAttribute.cs" />
@@ -332,6 +333,7 @@
     <Compile Include="Models\DataTypes\RelatedLink\RelatedLinkBase.cs" />
     <Compile Include="Models\DataTypes\RelatedLink\RelatedLinkData.cs" />
     <Compile Include="Models\DataTypes\RelatedLink\RelatedLinkType.cs" />
+    <Compile Include="Models\DocumentTypes\IRoutable.cs" />
     <Compile Include="Models\DocumentTypes\ISearchable.cs" />
     <Compile Include="Models\DocumentTypes\NestedComponent.cs" />
     <Compile Include="Models\MediaTypes\ImageExtensions.cs" />
@@ -393,7 +395,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DevTrends.MvcDonutCaching.README.txt" />
     <EmbeddedResource Include="Resources\PropertyEditors\CharDisplayPropertyEditor\chardisplayeditor.controller.js" />
     <EmbeddedResource Include="Resources\PropertyEditors\CharDisplayPropertyEditor\chardisplayeditor.html" />
     <EmbeddedResource Include="Resources\PropertyEditors\CharLimitPropertyEditor\charlimiteditor.controller.js" />

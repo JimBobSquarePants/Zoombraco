@@ -10,6 +10,7 @@ namespace Zoombraco.Models
     using System.Web;
     using Our.Umbraco.Ditto;
     using Umbraco.Core;
+    using Umbraco.Core.Models;
     using Umbraco.Web;
     using Zoombraco.ComponentModel.Processors;
     using Zoombraco.ComponentModel.Search;
@@ -21,7 +22,7 @@ namespace Zoombraco.Models
     /// </summary>
     [DittoLazy]
     [UmbracoPicker]
-    public class Page : IEntity, IMeta, IXmlSitemap, ISearchable, IUrl, INavigation
+    public class Page : IEntity, IMeta, IXmlSitemap, ISearchable, IUrl, IRoutable, INavigation
     {
         /// <summary>
         /// The content helper
@@ -48,8 +49,16 @@ namespace Zoombraco.Models
         public virtual DateTime UpdateDate { get; set; }
 
         /// <inheritdoc/>
+        [VortoProperty(Recursive = true)]
+        public virtual string BrowserWebsiteTitle { get; set; }
+
+        /// <inheritdoc/>
         [VortoProperty(AltPropertyName = ZoombracoConstants.Content.Name)]
-        public virtual string BrowserTitle { get; set; }
+        public virtual string BrowserPageTitle { get; set; }
+
+        /// <inheritdoc/>
+        [UmbracoProperty(Recursive = true)]
+        public virtual bool? SwitchTitleOrder { get; set; }
 
         /// <inheritdoc/>
         [VortoProperty]
@@ -87,6 +96,22 @@ namespace Zoombraco.Models
         /// <inheritdoc/>
         [UmbracoProperty(Constants.Conventions.Content.UrlName, ZoombracoConstants.Content.Url)]
         public virtual string Url { get; set; }
+
+        /// <inheritdoc/>
+        [UmbracoProperty(PropertyName = Constants.Conventions.Content.UrlName)]
+        public string AlternativeUrl { get; set; }
+
+        /// <inheritdoc/>
+        [UmbracoProperty(PropertyName = Constants.Conventions.Content.UrlAlias)]
+        public string AdditionalUrl { get; set; }
+
+        /// <inheritdoc/>
+        [PublishedPicker(Constants.Conventions.Content.Redirect)]
+        public IPublishedContent TemporaryRedirect { get; set; }
+
+        /// <inheritdoc/>
+        [PublishedPicker(Constants.Conventions.Content.InternalRedirectId)]
+        public IPublishedContent TransparentRedirect { get; set; }
 
         /// <inheritdoc/>
         public virtual string UrlAbsolute()

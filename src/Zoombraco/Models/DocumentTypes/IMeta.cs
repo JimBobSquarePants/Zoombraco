@@ -11,19 +11,22 @@ namespace Zoombraco.Models
     public interface IMeta
     {
         /// <summary>
-        /// Gets or sets the page title that will be displayed to search engines and in
-        /// the browser tab.
-        /// <remarks>
-        /// Identified in the back office as browserTitle.
-        /// </remarks>
+        /// Gets or sets the website title that will be displayed to search engines and in the browser tab.
         /// </summary>
-        string BrowserTitle { get; set; }
+        string BrowserWebsiteTitle { get; set; }
+
+        /// <summary>
+        /// Gets or sets the page title that will be displayed to search engines and in the browser tab.
+        /// </summary>
+        string BrowserPageTitle { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the title order should be switched. Defaults to page | website.
+        /// </summary>
+        bool? SwitchTitleOrder { get; set; }
 
         /// <summary>
         /// Gets or sets the page description search engine results. Optimum 150 - 160 characters.
-        /// <remarks>
-        /// Identified in the back office as browserDescription.
-        /// </remarks>
         /// </summary>
         string BrowserDescription { get; set; }
 

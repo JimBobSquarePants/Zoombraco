@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <appSettings>
+    <add key="Zoombraco:ImageCdnRequestTimeout" value="2000" xdt:Transform="InsertIfMissing"/>
+    <add key="Zoombraco:OutputCacheDuration" value="3600" xdt:Transform="InsertIfMissing"/>
+  </appSettings>
+</configuration>

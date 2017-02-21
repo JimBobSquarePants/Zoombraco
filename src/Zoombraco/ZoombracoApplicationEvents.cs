@@ -82,6 +82,12 @@ namespace Zoombraco
         /// </param>
         protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
+            // Try and install the package.
+            if (!ZoombracoBootstrapper.Install(umbracoApplication, applicationContext))
+            {
+                return;
+            }
+
             // Register custom routes.
             RouteBuilder.RegisterRoutes(RouteTable.Routes);
 

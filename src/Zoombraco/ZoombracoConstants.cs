@@ -49,6 +49,11 @@ namespace Zoombraco
         public static class Configuration
         {
             /// <summary>
+            /// The current Zoombraco version;
+            /// </summary>
+            public const string Version = "Zoombraco:Version";
+
+            /// <summary>
             /// The configuration key for setting the duration in seconds to cache action results for using donut caching.
             /// </summary>
             public const string OutputCacheDuration = "Zoombraco:OutputCacheDuration";
@@ -58,6 +63,11 @@ namespace Zoombraco
             /// reverting to default cached storage locations.
             /// </summary>
             public const string ImageCdnRequestTimeout = "Zoombraco:ImageCdnRequestTimeout";
+
+            /// <summary>
+            /// The configuration key for setting whether the Umbraco ModelsBuilder package is enabled.
+            /// </summary>
+            public const string ModelsBuilderEnabled = "Umbraco.ModelsBuilder.Enable";
         }
 
         /// <summary>

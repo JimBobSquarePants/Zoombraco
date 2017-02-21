@@ -22,7 +22,5 @@
   </metadata>
   <files>
     <file src="..\..\build\content\README.txt" target="README.txt" />
-    <file src="..\..\build\content\web.config.transform" target="content\web.config.transform"/>
-    <file src="..\..\tests\ZoombracoDemo.Web\Media\created-packages\Zoombraco_0.5.0.zip" target="content\Zoombraco.zip" />
   </files>
 </package>

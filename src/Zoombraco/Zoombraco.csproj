@@ -329,6 +329,8 @@
     <Compile Include="ComponentModel\Processors\NuPickerAttribute.cs" />
     <Compile Include="Controllers\ZoombracoXmlSitemapController.cs" />
     <Compile Include="Controllers\ZoombracoApiController.cs" />
+    <Compile Include="Helpers\PackageHelper.cs" />
+    <Compile Include="ZoombracoBootstrapper.cs" />
     <Compile Include="Models\DataTypes\RelatedLink\RelatedLink.cs" />
     <Compile Include="Models\DataTypes\RelatedLink\RelatedLinkBase.cs" />
     <Compile Include="Models\DataTypes\RelatedLink\RelatedLinkData.cs" />
@@ -393,6 +395,8 @@
     <None Include="ComponentModel\PropertyValueConverters\RelatedLink\README.md" />
     <None Include="Models\DataTypes\RelatedLink\README.md" />
     <None Include="packages.config" />
+    <EmbeddedResource Include="Resources\Package\XmlSitemap.cshtml" />
+    <EmbeddedResource Include="Resources\Package\_Meta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\PropertyEditors\CharDisplayPropertyEditor\chardisplayeditor.controller.js" />
@@ -400,6 +404,13 @@
     <EmbeddedResource Include="Resources\PropertyEditors\CharLimitPropertyEditor\charlimiteditor.controller.js" />
     <EmbeddedResource Include="Resources\PropertyEditors\CharLimitPropertyEditor\charlimiteditor.html" />
     <EmbeddedResource Include="Resources\PropertyEditors\Config\requirednumber.html" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Package\package.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Package\Info.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

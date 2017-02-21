@@ -1,0 +1,1 @@
+﻿The embedded files have been extracted from the generated zip file from the back office in our test project.

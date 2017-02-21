@@ -6,7 +6,13 @@
 namespace Zoombraco
 {
     using System;
+    using System.Configuration;
+    using System.Linq;
     using System.Web.Configuration;
+    using System.Xml.Linq;
+    using Semver;
+    using Umbraco.Core.IO;
+    using Umbraco.Core.Logging;
 
     /// <summary>
     /// Provides access to site wide configuration values.
@@ -33,6 +39,11 @@ namespace Zoombraco
         public static ZoombracoConfiguration Instance => LazyInstance.Value;
 
         /// <summary>
+        /// Gets the currently runnning Zoombraco version.
+        /// </summary>
+        public SemVersion CurrentVersion { get; private set; }
+
+        /// <summary>
         /// Gets the amount of time in minutes to cache content for.
         /// </summary>
         public int OutputCacheDuration { get; private set; }
@@ -44,10 +55,66 @@ namespace Zoombraco
         public int ImageCdnRequestTimeout { get; private set; } = 1000;
 
         /// <summary>
+        /// Saves a setting into the configuration file.
+        /// </summary>
+        /// <param name="key">Key of the setting to be saved.</param>
+        /// <param name="value">Value of the setting to be saved.</param>
+        internal static void SaveSetting(string key, string value)
+        {
+            string fileName = IOHelper.MapPath($"{SystemDirectories.Root}/web.config");
+            XDocument xml = XDocument.Load(fileName, LoadOptions.PreserveWhitespace);
+
+            if (xml.Root != null)
+            {
+                XElement appSettings = xml.Root.DescendantsAndSelf("appSettings").Single();
+
+                // Update appSetting if it exists, else create a new appSetting for the given key and value.
+                // ReSharper disable once PossibleNullReferenceException
+                XElement setting = appSettings.Descendants("add").FirstOrDefault(s => s.Attribute("key").Value == key);
+                if (setting == null)
+                {
+                    appSettings.Add(new XElement("add", new XAttribute("key", key), new XAttribute("value", value)));
+                }
+                else
+                {
+                    // ReSharper disable once PossibleNullReferenceException
+                    setting.Attribute("value").Value = value;
+                }
+            }
+
+            xml.Save(fileName, SaveOptions.DisableFormatting);
+            ConfigurationManager.RefreshSection("appSettings");
+        }
+
+        /// <summary>
         /// Initializes all the settings values from the config.
         /// </summary>
         private void Initialize()
         {
+            try
+            {
+                Version currentVersion;
+                string[] configuredVersion = WebConfigurationManager.AppSettings[ZoombracoConstants.Configuration.Version].Split('-');
+                if (Version.TryParse(configuredVersion[0], out currentVersion))
+                {
+                    this.CurrentVersion = new SemVersion(
+                        currentVersion.Major,
+                        currentVersion.Minor,
+                        currentVersion.Build,
+                        configuredVersion.Length > 1 && !string.IsNullOrWhiteSpace(configuredVersion[1]) ? configuredVersion[1] : null,
+                        currentVersion.Revision > 0 ? currentVersion.Revision.ToString() : null);
+                }
+                else
+                {
+                    this.CurrentVersion = new SemVersion(0);
+                }
+            }
+            catch
+            {
+                LogHelper.Info<ZoombracoConfiguration>($"No {ZoombracoConstants.Configuration.Version} appsetting found.");
+                this.CurrentVersion = new SemVersion(0);
+            }
+
             int duration;
             if (int.TryParse(WebConfigurationManager.AppSettings[ZoombracoConstants.Configuration.OutputCacheDuration], out duration))
             {

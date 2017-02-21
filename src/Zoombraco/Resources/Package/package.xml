@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<umbPackage>
+  <files>
+    <file>
+      <guid>XmlSitemap.cshtml</guid>
+      <orgPath>/Views/Shared</orgPath>
+      <orgName>XmlSitemap.cshtml</orgName>
+    </file>
+    <file>
+      <guid>_Meta.cshtml</guid>
+      <orgPath>/Views/Partials/Shared</orgPath>
+      <orgName>_Meta.cshtml</orgName>
+    </file>
+  </files>
+  <info>
+    <package>
+      <name>Zoombraco</name>
+      <version>0.5.0</version>
+      <iconUrl>https://raw.githubusercontent.com/JimBobSquarePants/Zoombraco/develop/build/assets/logo/zoombraco-64.png</iconUrl>
+      <license url="http://www.apache.org/licenses/">Apache 2.0 License</license>
+      <url>https://github.com/JimBobSquarePants/Zoombraco</url>
+      <requirements type="strict">
+        <major>7</major>
+        <minor>5</minor>
+        <patch>0</patch>
+      </requirements>
+    </package>
+    <author>
+      <name>James Jackson-South</name>
+      <website>http://jamessouth.me/</website>
+    </author>
+    <readme><![CDATA[A lean boilerplate for rapidly developing fast, scalable, easy to maintain, strong-typed Umbraco websites.]]></readme>
+  </info>
+  <DocumentTypes>
+    <DocumentType Folders="Compositions/Zoombraco">
+      <Info>
+        <Name>IMeta</Name>
+        <Alias>iMeta</Alias>
+        <Icon>icon-umb-developer</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description>Encapsulates properties required for page metadata.</Description>
+        <AllowAtRoot>False</AllowAtRoot>
+        <IsListView>False</IsListView>
+        <Compositions />
+        <AllowedTemplates />
+        <DefaultTemplate />
+      </Info>
+      <Structure />
+      <GenericProperties>
+        <GenericProperty>
+          <Name>Switch Title Order</Name>
+          <Alias>switchTitleOrder</Alias>
+          <Type>Umbraco.TrueFalse</Type>
+          <Definition>92897bc6-a5f3-4ffe-ae27-f2e7e33dda49</Definition>
+          <Tab>Meta</Tab>
+          <SortOrder>2</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[Whether the title order should be switched. Recursive.<br><br>Defaults to "page | website".]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Browser Page Title</Name>
+          <Alias>browserPageTitle</Alias>
+          <Type>Our.Umbraco.Vorto</Type>
+          <Definition>9a09797f-ab46-4e89-b48a-1c807f8741ca</Definition>
+          <Tab>Meta</Tab>
+          <SortOrder>1</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[The page title that will be displayed to search engines and in the browser tab. Falls back to the name of the page. <br><br>Optimum 30-35 characters.]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Open Graph Image</Name>
+          <Alias>openGraphImage</Alias>
+          <Type>Umbraco.MultipleMediaPicker</Type>
+          <Definition>93929b9a-93a2-4e2a-b239-d99334440a59</Definition>
+          <Tab>Meta</Tab>
+          <SortOrder>6</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[The image that represents your document when shared in social media.]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Browser Website Title</Name>
+          <Alias>browserWebsiteTitle</Alias>
+          <Type>Our.Umbraco.Vorto</Type>
+          <Definition>9a09797f-ab46-4e89-b48a-1c807f8741ca</Definition>
+          <Tab>Meta</Tab>
+          <SortOrder>0</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[The optional website title that will be displayed to search engines and in the browser tab. Recursive. <br><br>Optimum 30-35 characters.]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Open Graph Title</Name>
+          <Alias>openGraphTitle</Alias>
+          <Type>Our.Umbraco.Vorto</Type>
+          <Definition>9a09797f-ab46-4e89-b48a-1c807f8741ca</Definition>
+          <Tab>Meta</Tab>
+          <SortOrder>4</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[The title of the document as it should appear when shared in social media.]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Browser Description</Name>
+          <Alias>browserDescription</Alias>
+          <Type>Our.Umbraco.Vorto</Type>
+          <Definition>9e260486-f2bd-4f92-b261-03ab8c407fb4</Definition>
+          <Tab>Meta</Tab>
+          <SortOrder>3</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[The page description search engine results. <br><br>Optimum 150 - 160 characters.]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Open Graph Type</Name>
+          <Alias>openGraphType</Alias>
+          <Type>nuPickers.EnumDropDownPicker</Type>
+          <Definition>cccd7cac-89a8-4fa8-8093-d480d19c0eba</Definition>
+          <Tab>Meta</Tab>
+          <SortOrder>5</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[The type of your document as it should appear when shared in social media.<br><br>Defaults to "website"]]></Description>
+        </GenericProperty>
+      </GenericProperties>
+      <Tabs>
+        <Tab>
+          <Id>12</Id>
+          <Caption>Meta</Caption>
+          <SortOrder>999</SortOrder>
+        </Tab>
+      </Tabs>
+    </DocumentType>
+    <DocumentType Folders="Compositions/Zoombraco">
+      <Info>
+        <Name>IRoutable</Name>
+        <Alias>iRoutable</Alias>
+        <Icon>icon-umb-developer</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description>Encapsulates properties that allow the manipulation of page urls.</Description>
+        <AllowAtRoot>False</AllowAtRoot>
+        <IsListView>False</IsListView>
+        <Compositions />
+        <AllowedTemplates />
+        <DefaultTemplate />
+      </Info>
+      <Structure />
+      <GenericProperties>
+        <GenericProperty>
+          <Name>Additional Url</Name>
+          <Alias>umbracoUrlAlias</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Routing</Tab>
+          <SortOrder>1</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[An additional url to the one generated from the name.]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Temporary Redirect</Name>
+          <Alias>umbracoRedirect</Alias>
+          <Type>Umbraco.ContentPickerAlias</Type>
+          <Definition>a6857c73-d6e9-480c-b6e6-f15f6ad11125</Definition>
+          <Tab>Routing</Tab>
+          <SortOrder>2</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[The node to perform a temporary 302 redirect to.]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Transparent Redirect</Name>
+          <Alias>umbracoInternalRedirectId</Alias>
+          <Type>Umbraco.ContentPickerAlias</Type>
+          <Definition>a6857c73-d6e9-480c-b6e6-f15f6ad11125</Definition>
+          <Tab>Routing</Tab>
+          <SortOrder>3</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[The node to perform an internal redirect to. The url does not change.]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Alternative Url</Name>
+          <Alias>umbracoUrlName</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Routing</Tab>
+          <SortOrder>0</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[An alternative url than the one generated from the name.]]></Description>
+        </GenericProperty>
+      </GenericProperties>
+      <Tabs>
+        <Tab>
+          <Id>20</Id>
+          <Caption>Routing</Caption>
+          <SortOrder>1001</SortOrder>
+        </Tab>
+      </Tabs>
+    </DocumentType>
+    <DocumentType Folders="Compositions/Zoombraco">
+      <Info>
+        <Name>ISearchable</Name>
+        <Alias>iSearchable</Alias>
+        <Icon>icon-umb-developer</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description>Encapsulates properties required to determine whether a page or component should indexed by the search engine.</Description>
+        <AllowAtRoot>False</AllowAtRoot>
+        <IsListView>False</IsListView>
+        <Compositions />
+        <AllowedTemplates />
+        <DefaultTemplate />
+      </Info>
+      <Structure />
+      <GenericProperties>
+        <GenericProperty>
+          <Name>Exclude From Search Results</Name>
+          <Alias>excludeFromSearchResults</Alias>
+          <Type>Umbraco.TrueFalse</Type>
+          <Definition>92897bc6-a5f3-4ffe-ae27-f2e7e33dda49</Definition>
+          <Tab>Visibility</Tab>
+          <SortOrder>0</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[A value indicating whether the page should be excluded from search results.]]></Description>
+        </GenericProperty>
+      </GenericProperties>
+      <Tabs>
+        <Tab>
+          <Id>18</Id>
+          <Caption>Visibility</Caption>
+          <SortOrder>1000</SortOrder>
+        </Tab>
+      </Tabs>
+    </DocumentType>
+    <DocumentType Folders="Compositions/Zoombraco">
+      <Info>
+        <Name>IXmlSitemap</Name>
+        <Alias>iXmlSitemap</Alias>
+        <Icon>icon-umb-developer</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description>Encapsulates properties required to render a page correctly in an XML sitemap.</Description>
+        <AllowAtRoot>False</AllowAtRoot>
+        <IsListView>False</IsListView>
+        <Compositions />
+        <AllowedTemplates />
+        <DefaultTemplate />
+      </Info>
+      <Structure />
+      <GenericProperties>
+        <GenericProperty>
+          <Name>Change Frequency</Name>
+          <Alias>changeFrequency</Alias>
+          <Type>nuPickers.EnumDropDownPicker</Type>
+          <Definition>6901b567-3fa6-4a34-91f5-ee96b1ae2101</Definition>
+          <Tab>Visibility</Tab>
+          <SortOrder>1</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[The frequency at which updates will be made to the page.]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Priority</Name>
+          <Alias>priority</Alias>
+          <Type>Umbraco.Slider</Type>
+          <Definition>18d92c34-b038-467d-8aba-137e7ecc6d25</Definition>
+          <Tab>Visibility</Tab>
+          <SortOrder>2</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[The priority of this URL relative to other URLs on your site.]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Exclude From Xml Sitemap</Name>
+          <Alias>excludeFromXmlSitemap</Alias>
+          <Type>Umbraco.TrueFalse</Type>
+          <Definition>92897bc6-a5f3-4ffe-ae27-f2e7e33dda49</Definition>
+          <Tab>Visibility</Tab>
+          <SortOrder>0</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[A value indicating whether the page should be excluded from xml sitemap.]]></Description>
+        </GenericProperty>
+      </GenericProperties>
+      <Tabs>
+        <Tab>
+          <Id>13</Id>
+          <Caption>Visibility</Caption>
+          <SortOrder>1000</SortOrder>
+        </Tab>
+      </Tabs>
+    </DocumentType>
+  </DocumentTypes>
+  <Templates>
+    <Template>
+      <Name>Zoombraco</Name>
+      <Alias>Zoombraco</Alias>
+      <Design><![CDATA[@using Zoombraco.Models
+@using Zoombraco.Views
+
+@inherits ZoombracoViewPage<IRenderPage<Zoombraco.Models.Page>>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="@Model.CurrentCulture.TwoLetterISOLanguageName" prefix="og: http://ogp.me/ns#">
+<head>
+    @Html.Partial("~/Views/Partials/Shared/_Meta.cshtml", Model)
+    @RenderSection("HeaderAssets", false)
+</head>
+<body>
+    @RenderBody()
+    @RenderSection("BodyAssets", false)
+</body>
+</html>]]></Design>
+    </Template>
+  </Templates>
+  <Stylesheets />
+  <Macros />
+  <DictionaryItems />
+  <Languages />
+  <DataTypes>
+    <DataType Name="Zoombraco.OpenGraphTypePicker" Id="nuPickers.EnumDropDownPicker" Definition="cccd7cac-89a8-4fa8-8093-d480d19c0eba" DatabaseType="Ntext" Folders="Zoombraco">
+      <PreValues>
+        <PreValue Id="6" Value="{&#xD;&#xA;  &quot;assemblyName&quot;: &quot;Zoombraco.dll&quot;,&#xD;&#xA;  &quot;apiController&quot;: &quot;EnumDataSourceApi&quot;,&#xD;&#xA;  &quot;enumName&quot;: &quot;Zoombraco.Models.OpenGraphType&quot;&#xD;&#xA;}" Alias="dataSource" SortOrder="0" />
+        <PreValue Id="7" Value="csv" Alias="saveFormat" SortOrder="1" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Zoombraco.ChangeFrequencyPicker" Id="nuPickers.EnumDropDownPicker" Definition="6901b567-3fa6-4a34-91f5-ee96b1ae2101" DatabaseType="Ntext" Folders="Zoombraco">
+      <PreValues>
+        <PreValue Id="8" Value="{&#xD;&#xA;  &quot;assemblyName&quot;: &quot;Zoombraco.dll&quot;,&#xD;&#xA;  &quot;apiController&quot;: &quot;EnumDataSourceApi&quot;,&#xD;&#xA;  &quot;enumName&quot;: &quot;Zoombraco.Models.ChangeFrequency&quot;&#xD;&#xA;}" Alias="dataSource" SortOrder="0" />
+        <PreValue Id="9" Value="csv" Alias="saveFormat" SortOrder="1" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Zoombraco.PriorityPicker" Id="Umbraco.Slider" Definition="18d92c34-b038-467d-8aba-137e7ecc6d25" DatabaseType="Nvarchar" Folders="Zoombraco">
+      <PreValues>
+        <PreValue Id="64" Value="" Alias="enableRange" SortOrder="0" />
+        <PreValue Id="65" Value="horizontal" Alias="orientation" SortOrder="1" />
+        <PreValue Id="66" Value="0.5" Alias="initVal1" SortOrder="2" />
+        <PreValue Id="67" Value="" Alias="initVal2" SortOrder="3" />
+        <PreValue Id="68" Value="0" Alias="minVal" SortOrder="4" />
+        <PreValue Id="69" Value="1" Alias="maxVal" SortOrder="5" />
+        <PreValue Id="70" Value="0.1" Alias="step" SortOrder="6" />
+        <PreValue Id="71" Value="" Alias="precision" SortOrder="7" />
+        <PreValue Id="72" Value="round" Alias="handle" SortOrder="8" />
+        <PreValue Id="73" Value="show" Alias="tooltip" SortOrder="9" />
+        <PreValue Id="74" Value="" Alias="tooltipSplit" SortOrder="10" />
+        <PreValue Id="75" Value="" Alias="tooltipFormat" SortOrder="11" />
+        <PreValue Id="76" Value="" Alias="tooltipPosition" SortOrder="12" />
+        <PreValue Id="77" Value="" Alias="reversed" SortOrder="13" />
+        <PreValue Id="78" Value="" Alias="ticks" SortOrder="14" />
+        <PreValue Id="79" Value="" Alias="ticksPositions" SortOrder="15" />
+        <PreValue Id="80" Value="" Alias="ticksLabels" SortOrder="16" />
+        <PreValue Id="81" Value="" Alias="ticksSnapBounds" SortOrder="17" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Zoombraco.VortoMetaDescription" Id="Our.Umbraco.Vorto" Definition="9e260486-f2bd-4f92-b261-03ab8c407fb4" DatabaseType="Ntext" Folders="Zoombraco">
+      <PreValues>
+        <PreValue Id="167" Value="{&#xD;&#xA;  &quot;guid&quot;: &quot;87d2e2f9-d2c6-4a0c-8153-e0cbdad47e15&quot;,&#xD;&#xA;  &quot;name&quot;: &quot;Zoombraco.160CharEditor&quot;,&#xD;&#xA;  &quot;propertyEditorAlias&quot;: &quot;Zoombraco.CharDisplayEditor&quot;&#xD;&#xA;}" Alias="dataType" SortOrder="0" />
+        <PreValue Id="168" Value="installed" Alias="languageSource" SortOrder="1" />
+        <PreValue Id="169" Value="" Alias="xpath" SortOrder="2" />
+        <PreValue Id="170" Value="" Alias="displayNativeNames" SortOrder="3" />
+        <PreValue Id="171" Value="" Alias="primaryLanguage" SortOrder="4" />
+        <PreValue Id="172" Value="ignore" Alias="mandatoryBehaviour" SortOrder="5" />
+        <PreValue Id="173" Value="ignore" Alias="rtlBehaviour" SortOrder="6" />
+        <PreValue Id="174" Value="" Alias="hideLabel" SortOrder="7" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Zoombraco.VortoMetaTitle" Id="Our.Umbraco.Vorto" Definition="9a09797f-ab46-4e89-b48a-1c807f8741ca" DatabaseType="Ntext" Folders="Zoombraco">
+      <PreValues>
+        <PreValue Id="177" Value="{&#xD;&#xA;  &quot;guid&quot;: &quot;9852dd9c-9b2a-4e02-842a-888ba5156de6&quot;,&#xD;&#xA;  &quot;name&quot;: &quot;Zoombraco.CharDisplayTextBox&quot;,&#xD;&#xA;  &quot;propertyEditorAlias&quot;: &quot;Zoombraco.CharDisplayEditor&quot;&#xD;&#xA;}" Alias="dataType" SortOrder="0" />
+        <PreValue Id="178" Value="installed" Alias="languageSource" SortOrder="1" />
+        <PreValue Id="179" Value="" Alias="xpath" SortOrder="2" />
+        <PreValue Id="180" Value="" Alias="displayNativeNames" SortOrder="3" />
+        <PreValue Id="181" Value="" Alias="primaryLanguage" SortOrder="4" />
+        <PreValue Id="182" Value="ignore" Alias="mandatoryBehaviour" SortOrder="5" />
+        <PreValue Id="183" Value="ignore" Alias="rtlBehaviour" SortOrder="6" />
+        <PreValue Id="184" Value="" Alias="hideLabel" SortOrder="7" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Zoombraco.CharDisplayTextArea" Id="Zoombraco.CharDisplayEditor" Definition="87d2e2f9-d2c6-4a0c-8153-e0cbdad47e15" DatabaseType="Ntext" Folders="Zoombraco">
+      <PreValues>
+        <PreValue Id="176" Value="1" Alias="multiple" SortOrder="0" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Zoombraco.CharDisplayTextBox" Id="Zoombraco.CharDisplayEditor" Definition="9852dd9c-9b2a-4e02-842a-888ba5156de6" DatabaseType="Ntext" Folders="Zoombraco">
+      <PreValues>
+        <PreValue Id="175" Value="" Alias="multiple" SortOrder="0" />
+      </PreValues>
+    </DataType>
+  </DataTypes>
+</umbPackage>

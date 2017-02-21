@@ -20,6 +20,6 @@
  <!--The amount of time in milliseconds to wait to before requesting an ImageProcessor url from the CDN.-->
  <add key="Zoombraco:ImageCdnRequestTimeout" value="1000" />
 
-  Additionaly the existing value will be set to false to prevent compatibility issues with Ditto.
+ Additionaly the existing value will be set to false to prevent compatibility issues with Ditto.
 
-  <add key="Umbraco.ModelsBuilder.Enable" value="false" />
+ <add key="Umbraco.ModelsBuilder.Enable" value="false" />

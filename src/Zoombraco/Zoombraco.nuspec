@@ -9,6 +9,7 @@
     <iconUrl>https://raw.githubusercontent.com/JimBobSquarePants/Zoombraco/develop/build/assets/logo/zoombraco-64.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
+    <releaseNotes>See the Github release for notes.</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Umbraco</tags>
     <dependencies>

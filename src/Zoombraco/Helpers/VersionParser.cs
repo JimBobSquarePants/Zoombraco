@@ -30,19 +30,17 @@ namespace Zoombraco.Helpers
         {
             Mandate.ParameterNotNull(version, nameof(version));
 
-            Version currentVersion;
+            Version current;
             string[] versionNumber = version.Split('-');
-            string[] buildRelease = versionNumber.Length > 1 ? versionNumber[1].Split('+') : null;
-            string prerelease = buildRelease?[0];
-            string build = buildRelease != null && buildRelease.Length > 1 ? buildRelease[1] : null;
-            if (Version.TryParse(versionNumber[0], out currentVersion))
+            string prerelease = versionNumber.Length > 1 ? versionNumber[1] : null;
+            if (Version.TryParse(versionNumber[0], out current))
             {
                 return new SemVersion(
-                    currentVersion.Major,
-                    currentVersion.Minor,
-                    currentVersion.Build,
+                    current.Major,
+                    current.Minor,
+                    current.Build,
                     prerelease,
-                    build);
+                    current.Revision > 0 ? current.Revision.ToInvariantString() : null);
             }
 
             return null;

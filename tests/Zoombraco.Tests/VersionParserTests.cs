@@ -19,8 +19,8 @@
         [Fact]
         public void VersionParserResolvesOrderCorrectly()
         {
-            SemVersion beta1 = VersionParser.FromSemanticString("0.5.0-beta+1");
-            SemVersion beta2 = VersionParser.FromSemanticString("0.5.0-beta+2");
+            SemVersion beta1 = VersionParser.FromSemanticString("0.5.0-beta1");
+            SemVersion beta2 = VersionParser.FromSemanticString("0.5.0-beta2");
             SemVersion release = VersionParser.ZoombracoProductVersion();
 
             Assert.True(release > beta1);

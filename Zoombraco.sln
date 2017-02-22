@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{871060E8
 		Zoombraco.nuspec = Zoombraco.nuspec
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zoombraco.Tests", "tests\Zoombraco.Tests\Zoombraco.Tests.csproj", "{E52CDEE2-D93C-4B3F-AB03-5BF81B4200BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{0BE28ECC-BA10-4AA7-8F1E-574BDA11B797}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BE28ECC-BA10-4AA7-8F1E-574BDA11B797}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BE28ECC-BA10-4AA7-8F1E-574BDA11B797}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E52CDEE2-D93C-4B3F-AB03-5BF81B4200BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E52CDEE2-D93C-4B3F-AB03-5BF81B4200BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E52CDEE2-D93C-4B3F-AB03-5BF81B4200BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E52CDEE2-D93C-4B3F-AB03-5BF81B4200BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -47,5 +53,6 @@ Global
 		{E13CE8A0-D9F4-4408-9943-E875EC978970} = {F6C37B62-29BE-406F-8818-C33CE5838C4F}
 		{838C9A49-63D9-4537-AAB2-9A7D7A2D746B} = {D597F02E-3E69-470F-AECB-A6EB4C969320}
 		{0BE28ECC-BA10-4AA7-8F1E-574BDA11B797} = {D597F02E-3E69-470F-AECB-A6EB4C969320}
+		{E52CDEE2-D93C-4B3F-AB03-5BF81B4200BC} = {D597F02E-3E69-470F-AECB-A6EB4C969320}
 	EndGlobalSection
 EndGlobal

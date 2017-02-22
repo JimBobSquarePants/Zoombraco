@@ -40,9 +40,9 @@ namespace Zoombraco
             }
 
             // Check our versioning.
-            Assembly assembly = typeof(ZoombracoBootstrapper).Assembly;
-            SemVersion currentVersion = new SemVersion(assembly.GetName().Version);
-            SemVersion installedVersion = ZoombracoConfiguration.Instance.CurrentVersion;
+            Assembly assembly = VersionParser.Assembly;
+            SemVersion currentVersion = VersionParser.ZoombracoProductVersion();
+            SemVersion installedVersion = ZoombracoConfiguration.Instance.ProductVersion;
             if (installedVersion >= currentVersion)
             {
                 LogHelper.Info<ZoombracoBootstrapper>($"Zoombraco {installedVersion} is installed and up-to-date. Aborting Zoombraco setup.");
@@ -70,7 +70,7 @@ namespace Zoombraco
                 if (installedVersion == new SemVersion(0))
                 {
                     ZoombracoConfiguration.SaveSetting(ZoombracoConstants.Configuration.OutputCacheDuration, "0");
-                    ZoombracoConfiguration.SaveSetting(ZoombracoConstants.Configuration.ImageCdnRequestTimeout, "1000");
+                    ZoombracoConfiguration.SaveSetting(ZoombracoConstants.Configuration.ImageCdnRequestTimeout, "2000");
                     ZoombracoConfiguration.SaveSetting(ZoombracoConstants.Configuration.ModelsBuilderEnabled, "false");
                 }
 

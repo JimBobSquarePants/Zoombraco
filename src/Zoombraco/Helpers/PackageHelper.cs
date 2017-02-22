@@ -224,7 +224,8 @@ namespace Zoombraco.Helpers
         {
             foreach (XElement element in elements)
             {
-                string name = (string)element.Element(Constants.Packaging.NameNodeName);
+                // ReSharper disable once PossibleNullReferenceException
+                string name = (string)element.Element("Info").Element(Constants.Packaging.NameNodeName);
                 this.Log($"Importing ContentType '{name}'");
                 this.packagingService.ImportContentTypes(new XElement(Constants.Packaging.DocumentTypesNodeName, element));
             }

@@ -3,6 +3,8 @@
 // Licensed under the Apache License, Version 2.0.
 // </copyright>
 
+using Zoombraco.Helpers;
+
 namespace Zoombraco
 {
     using System;
@@ -41,7 +43,7 @@ namespace Zoombraco
         /// <summary>
         /// Gets the currently runnning Zoombraco version.
         /// </summary>
-        public SemVersion CurrentVersion { get; private set; }
+        public SemVersion ProductVersion { get; private set; }
 
         /// <summary>
         /// Gets the amount of time in minutes to cache content for.
@@ -50,9 +52,9 @@ namespace Zoombraco
 
         /// <summary>
         /// Gets the timeout duration in milliseconds to wait for requests to images stored on CDN before
-        /// reverting to default cached storage locations. By default this is 1000ms.
+        /// reverting to default cached storage locations. By default this is 2000ms.
         /// </summary>
-        public int ImageCdnRequestTimeout { get; private set; } = 1000;
+        public int ImageCdnRequestTimeout { get; private set; } = 2000;
 
         /// <summary>
         /// Saves a setting into the configuration file.
@@ -93,26 +95,12 @@ namespace Zoombraco
         {
             try
             {
-                Version currentVersion;
-                string[] configuredVersion = WebConfigurationManager.AppSettings[ZoombracoConstants.Configuration.Version].Split('-');
-                if (Version.TryParse(configuredVersion[0], out currentVersion))
-                {
-                    this.CurrentVersion = new SemVersion(
-                        currentVersion.Major,
-                        currentVersion.Minor,
-                        currentVersion.Build,
-                        configuredVersion.Length > 1 && !string.IsNullOrWhiteSpace(configuredVersion[1]) ? configuredVersion[1] : null,
-                        currentVersion.Revision > 0 ? currentVersion.Revision.ToString() : null);
-                }
-                else
-                {
-                    this.CurrentVersion = new SemVersion(0);
-                }
+                this.ProductVersion = VersionParser.FromSemanticString(WebConfigurationManager.AppSettings[ZoombracoConstants.Configuration.Version]);
             }
             catch
             {
                 LogHelper.Info<ZoombracoConfiguration>($"No {ZoombracoConstants.Configuration.Version} appsetting found.");
-                this.CurrentVersion = new SemVersion(0);
+                this.ProductVersion = new SemVersion(0);
             }
 
             int duration;

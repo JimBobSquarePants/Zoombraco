@@ -330,6 +330,7 @@
     <Compile Include="Controllers\ZoombracoXmlSitemapController.cs" />
     <Compile Include="Controllers\ZoombracoApiController.cs" />
     <Compile Include="Helpers\PackageHelper.cs" />
+    <Compile Include="Helpers\VersionParser.cs" />
     <Compile Include="ZoombracoBootstrapper.cs" />
     <Compile Include="Models\DataTypes\RelatedLink\RelatedLink.cs" />
     <Compile Include="Models\DataTypes\RelatedLink\RelatedLinkBase.cs" />

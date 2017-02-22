@@ -15,9 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoombracoDemo.Web", "tests\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{871060E8-59B7-4E28-A3A0-31C183C09308}"
 	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
 		README.md = README.md
 		build\content\README.txt = build\content\README.txt
-		src\Zoombraco\Zoombraco.nuspec = src\Zoombraco\Zoombraco.nuspec
+		Zoombraco.nuspec = Zoombraco.nuspec
 	EndProjectSection
 EndProject
 Global

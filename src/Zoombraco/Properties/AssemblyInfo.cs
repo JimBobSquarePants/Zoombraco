@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Zoombraco")]
 [assembly: AssemblyDescription("A lean boilerplate for rapidly developing fast, scalable, easy to maintain, strong-typed Umbraco websites.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("James Jackson-South and contributors")]
+[assembly: AssemblyCompany("James Jackson-South and Contributors")]
 [assembly: AssemblyProduct("Zoombraco")]
 [assembly: AssemblyCopyright("Copyright © 2017")]
 [assembly: AssemblyTrademark("")]
@@ -37,4 +37,5 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("0.5.0.0")]
-[assembly: AssemblyFileVersion("0.5.0.*")]
+[assembly: AssemblyFileVersion("0.5.0.0")]
+[assembly: AssemblyInformationalVersion("0.5.0.0")]

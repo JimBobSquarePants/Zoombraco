@@ -1,16 +1,17 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
-    <version>$version$-pre</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <id>Zoombraco</id>
+    <version>$version$</version>
+    <title>Zoombraco</title>
+    <authors>James Jackson-South and Contributors</authors>
+    <owners>James Jackson-South</owners>
     <iconUrl>https://raw.githubusercontent.com/JimBobSquarePants/Zoombraco/develop/build/assets/logo/zoombraco-64.png</iconUrl>
+    <projectUrl>https://github.com/JimBobSquarePants/Zoombraco</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
+    <description>A lean boilerplate for rapidly developing fast, scalable, easy to maintain, strong-typed Umbraco websites.</description>
     <releaseNotes>See the Github release for notes.</releaseNotes>
-    <copyright>$copyright$</copyright>
+    <copyright>Copyright © 2017</copyright>
     <tags>Umbraco</tags>
     <dependencies>
       <dependency id="UmbracoCms.Core" version="7.5.0" />
@@ -22,6 +23,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\build\content\README.txt" target="README.txt" />
+    <file src="src\Zoombraco\bin\Release\Zoombraco.dll" target="lib\net452" />
+    <file src="build\content\README.txt" target="README.txt" />
   </files>
 </package>

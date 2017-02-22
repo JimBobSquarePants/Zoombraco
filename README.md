@@ -76,6 +76,10 @@ public class GenericController : ZoombracoController
  - Multitentant aware codebase
  - Image CDN url generation.
 
+## Documentation
+
+Documentation can be found via the [Wiki](https://github.com/JimBobSquarePants/Zoombraco/wiki) and is open for collaboration.
+
 ### Consuming the Solution
 
 At the moment the codebase is there but I'm lacking a complete demo. I'll get round to it though as I am writing an accompanying set of articles.

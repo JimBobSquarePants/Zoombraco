@@ -2,66 +2,9 @@
 
 This repository contains a lean boilerplate for rapidly developing fast, scalable, easy to maintain, strong-typed Umbraco websites. 
 
-Imagine being able to write code like this to produce Umbraco sites...
 
-**Demo Strong-typed Model**
-``` csharp
-/// <summary>
-/// The generic page document type
-/// </summary>
-public class Generic : Page, IHeroPanel, INested
-{
-    /// <inheritdoc />
-    public virtual IEnumerable<Image> HeroImages { get; set; }
 
-    /// <inheritdoc />
-    public virtual string HeroTitle { get; set; }
-
-    /// <inheritdoc />
-    public virtual RelatedLink HeroLink { get; set; }
-
-    /// <inheritdoc />
-    [UmbracoSearchMergedField]
-    [NestedRichTextSearchResolver]
-    public virtual IEnumerable<NestedComponent> NestedContent { get; set; }
-}
-```
-
-**Demo Controller ActionResult**
-``` csharp
-/// <summary>
-/// The Generic page controller
-/// </summary>
-[UmbracoOutputCache]
-public class GenericController : ZoombracoController
-{
-    /// <inheritdoc />
-    public override ActionResult Index(RenderModel model)
-    {
-        Generic generic = model.As<Generic>();
-        RenderPage<Generic> viewModel = new RenderPage<Generic>(generic);
-
-        return this.CurrentTemplate(viewModel);
-    }
-}
-```
-
-**Demo View**
-``` csharp
-@using Zoombraco.Models
-@using Zoombraco.Views
-
-@inherits ZoombracoViewPage<RenderPage<ZoombracoDemo.Logic.Models.Generic>>
-
-@{ Html.RenderPartial("~/Views/Partials/Shared/_HeroPanel.cshtml", Model.Content);}
-
-<h1>@Model.Content.Name</h1>
-
-<h2>Nested Content</h2>
-@{ Html.RenderPartial("~/Views/Partials/Shared/_NestedContent.cshtml", Model.Content);}
-```
-
-**Zoombraco** will let you do that and a lot more. The boilerplate is designed to be lean yet exceptionally powerful and flexible allowing you to create your own websites on a firm foundation. **Zoombraco** lets you concentrate on the fun features of your site while enabling you to maintain a strong MVC architecture.
+**Zoombraco** is designed to be lean yet exceptionally powerful and flexible allowing you to create your own websites on a firm foundation. **Zoombraco** lets you concentrate on the fun features of your site while enabling you to maintain a strong MVC architecture.
 
 ## Features
 
@@ -82,9 +25,24 @@ Documentation can be found via the [Wiki](https://github.com/JimBobSquarePants/Z
 
 ### Consuming the Solution
 
-At the moment the codebase is there but I'm lacking a complete demo. I'll get round to it though as I am writing an accompanying set of articles.
+At the moment the codebase is there but I'm lacking a complete web demo. I'll get round to it though as I am writing documentation and an accompanying set of articles.
 
-Eventually there will be a Nuget package for consuming the library.
+Nightlies are available from [MyGet](https://www.myget.org/gallery/zoombraco)
+
+A sample Nuget.config file is as follows:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <packageSources>
+    <add key="nuget.org" value="https://www.nuget.org/api/v2/" />
+    <add key="myget.ditto" value="https://www.myget.org/F/umbraco-ditto/" />
+    <add key="myget.zoombraco" value="https://www.myget.org/F/zoombraco/"/>
+  </packageSources>
+</configuration>
+```
+
+Eventually there will be a Nuget package for consuming the library once the Ditto dependency is released.
 
 Having a play around is encouraged, I'm always looking for feedback.
 

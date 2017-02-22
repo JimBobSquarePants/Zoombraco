@@ -3,8 +3,6 @@
 // Licensed under the Apache License, Version 2.0.
 // </copyright>
 
-using Zoombraco.Helpers;
-
 namespace Zoombraco
 {
     using System;
@@ -15,6 +13,7 @@ namespace Zoombraco
     using Semver;
     using Umbraco.Core.IO;
     using Umbraco.Core.Logging;
+    using Zoombraco.Helpers;
 
     /// <summary>
     /// Provides access to site wide configuration values.

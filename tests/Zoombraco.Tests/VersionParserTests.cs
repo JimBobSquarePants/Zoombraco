@@ -19,13 +19,13 @@
         [Fact]
         public void VersionParserResolvesOrderCorrectly()
         {
-            SemVersion beta7 = VersionParser.FromSemanticString("0.5.0-beta+7");
-            SemVersion beta9 = VersionParser.FromSemanticString("0.5.0-beta+9");
+            SemVersion beta1 = VersionParser.FromSemanticString("0.5.0-beta+1");
+            SemVersion beta2 = VersionParser.FromSemanticString("0.5.0-beta+2");
             SemVersion release = VersionParser.ZoombracoProductVersion();
 
-            Assert.True(release > beta7);
-            Assert.True(release > beta9);
-            Assert.True(beta9 > beta7);
+            Assert.True(release > beta1);
+            Assert.True(release > beta2);
+            Assert.True(beta2 > beta1);
         }
     }
 }

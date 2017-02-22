@@ -12,8 +12,8 @@ before_build:
 test: on
 
 artifacts:
-  - path: *.nupkg
-  - path: *.zip
+  - path: \*.nupkg
+  - path: \*.zip
 
 deploy:
      # MyGet Deployment for builds & releases

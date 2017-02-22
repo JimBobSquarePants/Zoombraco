@@ -104,7 +104,7 @@ namespace Zoombraco.Caching
         /// </returns>
         public static object GetOrAddItem(string key, Func<object> valueFactory, CacheItemPolicy policy = null, string regionName = null)
         {
-            object result = Cache.Get(key, regionName);
+            object result = GetItem(key, regionName);
             if (result == null)
             {
                 using (new WriteLock(Locker))
@@ -114,8 +114,6 @@ namespace Zoombraco.Caching
                         // Create a new cache policy with the default values
                         policy = new CacheItemPolicy();
                     }
-
-                    result = Cache.Get(key, regionName);
 
                     bool isAdded;
                     try
@@ -175,8 +173,7 @@ namespace Zoombraco.Caching
         /// is null.
         /// </param>
         /// <returns>
-        /// True if the update try succeeds, or false if there is an already an entry
-        ///  in the cache with the same key as key.
+        /// True if the update try succeeds, or false if there is an already an entry in the cache with the same key as key.
         /// </returns>
         public static bool UpdateItem(string key, object value, CacheItemPolicy policy = null, string regionName = null)
         {
@@ -249,7 +246,7 @@ namespace Zoombraco.Caching
             {
                 // You can't remove items from a collection whilst you are iterating over it so you need to
                 // create a collection to store the items to remove.
-                ConcurrentDictionary<string, string> tempDictionary = new ConcurrentDictionary<string, string>();
+                Dictionary<string, string> tempDictionary = new Dictionary<string, string>();
 
                 foreach (KeyValuePair<string, string> cacheItem in CacheItems)
                 {
@@ -262,7 +259,7 @@ namespace Zoombraco.Caching
                         {
                             string key = cacheItem.Key;
                             string value = cacheItem.Value;
-                            tempDictionary.AddOrUpdate(key, value, (oldkey, oldValue) => value);
+                            tempDictionary[key] = value;
                         }
                     }
                 }

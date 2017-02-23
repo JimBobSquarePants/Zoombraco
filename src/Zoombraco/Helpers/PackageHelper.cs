@@ -151,7 +151,12 @@ namespace Zoombraco.Helpers
                     Directory.CreateDirectory(directory);
                 }
 
-                using (FileStream outStream = File.OpenWrite(path))
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+
+                using (FileStream outStream = File.Create(path))
                 {
                     fileStream.CopyTo(outStream);
                 }

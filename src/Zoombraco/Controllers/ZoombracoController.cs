@@ -69,6 +69,11 @@ namespace Zoombraco.Controllers
         public virtual ContentHelper ContentHelper => this.contentHelper ?? (this.contentHelper = new ContentHelper(this.Umbraco));
 
         /// <summary>
+        /// Gets the view name for displaying handled errors. Defaults to "Error"
+        /// </summary>
+        public virtual string ErrorViewName { get; } = "Error";
+
+        /// <summary>
         /// Returns the default result of an action method for the controller used to perform a framework-level
         /// operation on behalf of the action method.
         /// <remarks>
@@ -247,8 +252,7 @@ namespace Zoombraco.Controllers
                 filterContext.HttpContext.Response.StatusCode = statusCode;
             }
 
-            // TODO: Implement this
-            filterContext.Result = this.View("Error");
+            filterContext.Result = this.View(this.ErrorViewName);
             filterContext.ExceptionHandled = true;
         }
 

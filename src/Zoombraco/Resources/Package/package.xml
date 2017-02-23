@@ -11,6 +11,11 @@
       <orgPath>/Views/Partials/Shared</orgPath>
       <orgName>_Meta.cshtml</orgName>
     </file>
+    <file>
+      <guid>Error.cshtml</guid>
+      <orgPath>/Views/Shared</orgPath>
+      <orgName>Error.cshtml</orgName>
+    </file>
   </files>
   <info>
     <package>

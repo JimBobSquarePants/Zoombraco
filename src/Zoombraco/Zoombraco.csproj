@@ -411,6 +411,7 @@
     <EmbeddedResource Include="Resources\Package\package.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Package\Error.cshtml" />
     <None Include="Resources\Package\Info.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -60,9 +60,11 @@ namespace Zoombraco
 
                     using (Stream meta = EmbeddedResourceHelper.GetResource(assembly, "_Meta.cshtml", out resourceName))
                     using (Stream sitemap = EmbeddedResourceHelper.GetResource(assembly, "XmlSitemap.cshtml", out resourceName))
+                    using (Stream error = EmbeddedResourceHelper.GetResource(assembly, "Error.cshtml", out resourceName))
                     {
                         packageHelper.UnpackFile(meta, "_Meta.cshtml");
                         packageHelper.UnpackFile(sitemap, "XmlSitemap.cshtml");
+                        packageHelper.UnpackFile(error, "Error.cshtml");
                     }
                 }
 

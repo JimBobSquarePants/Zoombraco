@@ -37,7 +37,7 @@ A sample Nuget.config file is as follows:
   <packageSources>
     <add key="nuget.org" value="https://www.nuget.org/api/v2/" />
     <add key="myget.ditto" value="https://www.myget.org/F/umbraco-ditto/" />
-    <add key="myget.zoombraco" value="https://www.myget.org/F/zoombraco/"/>
+    <add key="myget.zoombraco" value="https://www.myget.org/F/zoombraco/api/v3/index.json"/>
   </packageSources>
 </configuration>
 ```

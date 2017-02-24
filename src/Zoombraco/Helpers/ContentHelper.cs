@@ -313,24 +313,13 @@ namespace Zoombraco.Helpers
             }
 
             Type returnType = typeof(T);
-            bool isInterface = returnType.IsInterface;
 
-            // Filter the collection if necessary.
-            if (!isInterface && returnType != typeof(Page) && returnType != typeof(Component))
-            {
-                string name = returnType.Name;
-                if (!content.DocumentTypeAlias.InvariantEquals(name))
-                {
-                    return default(T);
-                }
-            }
-
-            // If we are passed a an interface then we want to return the type that implement that interface.
-            if (isInterface)
+            // Filter the collection if necessary by our specific type.
+            if (!this.IsInheritableType(returnType))
             {
                 Type type = this.GetRegisteredType(content.DocumentTypeAlias);
 
-                if (type != null && returnType.IsAssignableFrom(type))
+                if (type != null)
                 {
                     object meta = content.As(type);
                     if (meta != null)
@@ -341,9 +330,10 @@ namespace Zoombraco.Helpers
             }
             else
             {
+                // If we are passed an interface or a base type then we want to return all types that implement that interface or type.
                 Type type = this.GetRegisteredType(content.DocumentTypeAlias);
 
-                if (type != null)
+                if (type != null && returnType.IsAssignableFrom(type))
                 {
                     object meta = content.As(type);
                     if (meta != null)
@@ -375,33 +365,12 @@ namespace Zoombraco.Helpers
             }
 
             Type returnType = typeof(T);
-            bool isInterface = returnType.IsInterface;
 
-            // Filter the collection if necessary.
-            if (!isInterface && returnType != typeof(Page) && returnType != typeof(Models.Component))
+            // Filter the collection if necessary by our specific type.
+            if (!this.IsInheritableType(returnType))
             {
                 publishedContent = publishedContent.Where(c => c.DocumentTypeAlias.InvariantEquals(returnType.Name));
-            }
 
-            // If we are passed a an interface then we want to return all types that implement that interface.
-            if (isInterface)
-            {
-                foreach (IPublishedContent content in publishedContent)
-                {
-                    Type type = this.GetRegisteredType(content.DocumentTypeAlias);
-
-                    if (type != null && returnType.IsAssignableFrom(type))
-                    {
-                        object meta = content.As(type);
-                        if (meta != null)
-                        {
-                            yield return (T)meta;
-                        }
-                    }
-                }
-            }
-            else
-            {
                 foreach (IPublishedContent content in publishedContent)
                 {
                     Type type = this.GetRegisteredType(content.DocumentTypeAlias);
@@ -416,6 +385,37 @@ namespace Zoombraco.Helpers
                     }
                 }
             }
+            else
+            {
+                // If we are passed an interface or a base type then we want to return all types that implement that interface or type.
+                foreach (IPublishedContent content in publishedContent)
+                {
+                    Type type = this.GetRegisteredType(content.DocumentTypeAlias);
+
+                    if (type != null && returnType.IsAssignableFrom(type))
+                    {
+                        object meta = content.As(type);
+                        if (meta != null)
+                        {
+                            yield return (T)meta;
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Returns a value indicating whether a type is an interface or one of our known base types.
+        /// </summary>
+        /// <param name="returnType">The type.</param>
+        /// <returns>The <see cref="bool"/></returns>
+        private bool IsInheritableType(Type returnType)
+        {
+            bool isInterface = returnType.IsInterface;
+            bool isPage = returnType == typeof(Page);
+            bool isComponent = returnType == typeof(Component);
+
+            return isInterface || isPage || isComponent;
         }
     }
 }

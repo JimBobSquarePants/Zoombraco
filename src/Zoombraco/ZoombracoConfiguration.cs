@@ -62,7 +62,7 @@ namespace Zoombraco
         /// <param name="value">Value of the setting to be saved.</param>
         internal static void SaveSetting(string key, string value)
         {
-            string fileName = IOHelper.MapPath($"{SystemDirectories.Root}/web.config");
+            string fileName = Umbraco.Core.IO.IOHelper.MapPath($"{SystemDirectories.Root}/web.config");
             XDocument xml = XDocument.Load(fileName, LoadOptions.PreserveWhitespace);
 
             if (xml.Root != null)

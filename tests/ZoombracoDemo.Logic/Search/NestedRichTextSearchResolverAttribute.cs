@@ -67,7 +67,7 @@ namespace ZoombracoDemo.Logic.Search
                 // TODO: Get rich text editors for now. Think of something more generic later.
                 if (contentTypeAlias.InvariantEquals(nameof(NestedRichText)))
                 {
-                    JToken contentTypeAliasProperty = item[this.PropertyAlias];
+                    JToken contentTypeAliasProperty = item[nameof(NestedRichText.BodyText).ToFirstLowerInvariant()];
                     sb.Append(contentTypeAliasProperty?.ToObject<string>());
                 }
             }

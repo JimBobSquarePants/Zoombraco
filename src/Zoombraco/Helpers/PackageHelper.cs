@@ -8,7 +8,6 @@ namespace Zoombraco.Helpers
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Reflection;
     using System.Xml.Linq;
     using Umbraco.Core;
     using Umbraco.Core.Logging;
@@ -19,11 +18,6 @@ namespace Zoombraco.Helpers
     /// </summary>
     internal class PackageHelper
     {
-        /// <summary>
-        /// The root directory
-        /// </summary>
-        private static string rootDir;
-
         /// <summary>
         /// The packaging service
         /// </summary>
@@ -74,7 +68,7 @@ namespace Zoombraco.Helpers
             this.fileService = fileService;
             this.xml = XDocument.Load(stream);
 
-            if (this.xml.Root == null)
+            if (this.xml.Root == null || this.xml.Root.Name != Constants.Packaging.UmbPackageNodeName)
             {
                 LogHelper.Error<PackageHelper>("Stream contains an invalid package file.", new ArgumentException());
             }
@@ -141,7 +135,7 @@ namespace Zoombraco.Helpers
                 }
 
                 this.Log($"Importing File '{name}'");
-                string root = GetRootDirectorySafe();
+                string root = IOHelper.GetRootDirectorySafe();
                 string origin = ((string)file.Element(Constants.Packaging.OrgPathNodeName)).TrimStart("/");
                 string directory = Path.Combine(root, origin);
                 string path = Path.Combine(directory, name);
@@ -161,36 +155,6 @@ namespace Zoombraco.Helpers
                     fileStream.CopyTo(outStream);
                 }
             }
-        }
-
-        /// <summary>
-        /// Returns the path to the root of the application, by getting the path to where the assembly where this
-        /// method is included is present, then traversing until it's past the /bin directory. Ie. this makes it work
-        /// even if the assembly is in a /bin/debug or /bin/release folder
-        /// </summary>
-        /// <returns>The <see cref="string"/></returns>
-        private static string GetRootDirectorySafe()
-        {
-            if (!string.IsNullOrEmpty(rootDir))
-            {
-                return rootDir;
-            }
-
-            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
-            Uri uri = new Uri(codeBase);
-            string path = uri.LocalPath;
-            string baseDirectory = Path.GetDirectoryName(path);
-
-            if (string.IsNullOrEmpty(baseDirectory))
-            {
-                throw new Exception("No root directory could be resolved. Please ensure that your Umbraco solution is correctly configured.");
-            }
-
-            rootDir = baseDirectory.Contains("bin")
-                           ? baseDirectory.Substring(0, baseDirectory.LastIndexOf("bin", StringComparison.OrdinalIgnoreCase) - 1)
-                           : baseDirectory;
-
-            return rootDir;
         }
 
         /// <summary>

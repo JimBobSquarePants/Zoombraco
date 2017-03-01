@@ -68,6 +68,20 @@ namespace Zoombraco
                     }
                 }
 
+                // Edit the Examine config file.
+                string settings = Path.Combine(IOHelper.GetRootDirectorySafe(), "Config", "ExamineSettings.config");
+                if (!File.Exists(settings))
+                {
+                    LogHelper.Error<ZoombracoBootstrapper>($"Unable to install the Zoombraco. No ExamineSetting.config exists at the path {settings}", new FileNotFoundException());
+                    return false;
+                }
+
+                using (FileStream stream = File.Open(settings, FileMode.Open, FileAccess.ReadWrite))
+                {
+                    ExamineHelper examineHelper = new ExamineHelper(stream);
+                    examineHelper.UpdateExamineAnalyzer();
+                }
+
                 // Set default values.
                 if (installedVersion == new SemVersion(0))
                 {

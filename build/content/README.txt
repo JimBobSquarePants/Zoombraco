@@ -27,6 +27,11 @@
 
 
  Additionally the existing value will be set to false to prevent compatibility issues with Ditto.
-
-
+ 
  <add key="Umbraco.ModelsBuilder.Enable" value="false" />
+
+
+
+ To complete installation you now need to set your Global.asax file to inherit Zoombraco.ZoombracoGlobal as follows:
+ 
+ <%@ Application Inherits="Zoombraco.ZoombracoGlobal" Language="C#" %>

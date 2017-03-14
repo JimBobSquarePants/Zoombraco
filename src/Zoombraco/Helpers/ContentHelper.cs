@@ -100,36 +100,45 @@ namespace Zoombraco.Helpers
         /// all nodes matching the type.
         /// </param>
         /// <param name="level">The level to search.</param>
+        /// <param name="predicate">A function to test each item for a condition.</param>
         /// <returns>
         /// The nodes matching the given <see cref="Type"/>.
         /// </returns>
-        public IEnumerable<T> GetByNode<T>(int rootId = 0, int level = int.MaxValue)
+        public IEnumerable<T> GetByNode<T>(int rootId = 0, int level = 0, Func<IPublishedContent, bool> predicate = null)
             where T : class
         {
             // Get only the root and descendants of the given root.
             if (rootId > 0)
             {
-                if (level == int.MaxValue)
+                if (level == 0)
                 {
-                    return this.FilterAndParseCollection<T>(this.UmbracoHelper.TypedContent(rootId).Descendants());
+                    return this.FilterAndParseCollection<T>(predicate == null
+                        ? this.UmbracoHelper.TypedContent(rootId).Descendants()
+                        : this.UmbracoHelper.TypedContent(rootId).Descendants().Where(predicate));
                 }
 
-                return this.FilterAndParseCollection<T>(this.UmbracoHelper.TypedContent(rootId).Descendants(level));
+                return this.FilterAndParseCollection<T>(predicate == null
+                    ? this.UmbracoHelper.TypedContent(rootId).Descendants(level)
+                    : this.UmbracoHelper.TypedContent(rootId).Descendants(level).Where(predicate));
             }
 
             // Get all the nodes from all root nodes.
             List<T> nodes = new List<T>();
             foreach (IPublishedContent collection in this.UmbracoHelper.TypedContentAtRoot())
             {
-                if (level == int.MaxValue)
+                if (level == 0)
                 {
-                    nodes.AddRange(this.FilterAndParseCollection<T>(collection.Descendants()));
+                    nodes.AddRange(predicate == null
+                        ? this.FilterAndParseCollection<T>(collection.Descendants())
+                        : this.FilterAndParseCollection<T>(collection.Descendants().Where(predicate)));
                 }
 
-                nodes.AddRange(this.FilterAndParseCollection<T>(collection.Descendants(level)));
+                nodes.AddRange(predicate == null
+                    ? this.FilterAndParseCollection<T>(collection.Descendants(level))
+                    : this.FilterAndParseCollection<T>(collection.Descendants(level).Where(predicate)));
             }
 
-            return nodes.AsEnumerable();
+            return nodes;
         }
 
         /// <summary>
@@ -201,10 +210,12 @@ namespace Zoombraco.Helpers
         /// </summary>
         /// <param name="nodeId">The id of the current node to search from.</param>
         /// <param name="maxLevel">The maximum level to search.</param>
+        /// <param name="predicate">A function to test each item for a condition.</param>
         /// <returns>
         /// The <see cref="IEnumerable{Page}"/>.
         /// </returns>
-        public IEnumerable<Page> GetAncestors(int nodeId, int maxLevel = int.MaxValue) => this.GetAncestors<Page>(nodeId, maxLevel);
+        public IEnumerable<Page> GetAncestors(int nodeId, int maxLevel = int.MaxValue, Func<IPublishedContent, bool> predicate = null)
+            => this.GetAncestors<Page>(nodeId, maxLevel, predicate);
 
         /// <summary>
         /// Gets the ancestors of the current instance as the given <see cref="Type"/>.
@@ -212,34 +223,42 @@ namespace Zoombraco.Helpers
         /// <typeparam name="T">The type to return</typeparam>
         /// <param name="nodeId">The id of the current node to search from.</param>
         /// <param name="maxLevel">The maximum level to search.</param>
+        /// <param name="predicate">A function to test each item for a condition.</param>
         /// <returns>
         /// The <see cref="IEnumerable{T}"/>.
         /// </returns>
-        public IEnumerable<T> GetAncestors<T>(int nodeId, int maxLevel = int.MaxValue)
+        public IEnumerable<T> GetAncestors<T>(int nodeId, int maxLevel = int.MaxValue, Func<IPublishedContent, bool> predicate = null)
         {
-            return this.FilterAndParseCollection<T>(this.UmbracoHelper.TypedContent(nodeId).Ancestors(maxLevel));
+            return this.FilterAndParseCollection<T>(predicate == null
+                ? this.UmbracoHelper.TypedContent(nodeId).Ancestors(maxLevel)
+                : this.UmbracoHelper.TypedContent(nodeId).Ancestors(maxLevel).Where(predicate));
         }
 
         /// <summary>
         /// Gets the children of the current instance as an <see cref="IEnumerable{Page}"/>.
         /// </summary>
         /// <param name="nodeId">The id of the current node to search from.</param>
+        /// <param name="predicate">A function to test each item for a condition.</param>
         /// <returns>
         /// The <see cref="IEnumerable{Page}"/>.
         /// </returns>
-        public IEnumerable<Page> GetChildren(int nodeId) => this.GetChildren<Page>(nodeId);
+        public IEnumerable<Page> GetChildren(int nodeId, Func<IPublishedContent, bool> predicate = null)
+            => this.GetChildren<Page>(nodeId, predicate);
 
         /// <summary>
         /// Gets the children of the current instance as the given <see cref="Type"/>.
         /// </summary>
         /// <typeparam name="T">The type to return</typeparam>
         /// <param name="nodeId">The id of the current node to search from.</param>
+        /// <param name="predicate">A function to test each item for a condition.</param>
         /// <returns>
         /// The <see cref="IEnumerable{T}"/>.
         /// </returns>
-        public IEnumerable<T> GetChildren<T>(int nodeId)
+        public IEnumerable<T> GetChildren<T>(int nodeId, Func<IPublishedContent, bool> predicate = null)
         {
-            return this.FilterAndParseCollection<T>(this.UmbracoHelper.TypedContent(nodeId).Children);
+            return this.FilterAndParseCollection<T>(predicate == null
+                ? this.UmbracoHelper.TypedContent(nodeId).Children
+                : this.UmbracoHelper.TypedContent(nodeId).Children.Where(predicate));
         }
 
         /// <summary>
@@ -247,10 +266,12 @@ namespace Zoombraco.Helpers
         /// </summary>
         /// <param name="nodeId">The id of the current node to search from.</param>
         /// <param name="level">The level to search.</param>
+        /// <param name="predicate">A function to test each item for a condition.</param>
         /// <returns>
         /// The <see cref="IEnumerable{Page}"/>.
         /// </returns>
-        public IEnumerable<Page> GetDescendants(int nodeId, int level = 0) => this.GetDescendants<Page>(nodeId, level);
+        public IEnumerable<Page> GetDescendants(int nodeId, int level = 0, Func<IPublishedContent, bool> predicate = null)
+            => this.GetDescendants<Page>(nodeId, level, predicate);
 
         /// <summary>
         /// Gets the descendants of the current instance as the given <see cref="Type"/>.
@@ -258,17 +279,22 @@ namespace Zoombraco.Helpers
         /// <typeparam name="T">The type to return</typeparam>
         /// <param name="nodeId">The id of the current node to search from.</param>
         /// <param name="level">The level to search.</param>
+        /// <param name="predicate">A function to test each item for a condition.</param>
         /// <returns>
         /// The <see cref="IEnumerable{T}"/>.
         /// </returns>
-        public IEnumerable<T> GetDescendants<T>(int nodeId, int level = 0)
+        public IEnumerable<T> GetDescendants<T>(int nodeId, int level = 0, Func<IPublishedContent, bool> predicate = null)
         {
-            if (level == int.MaxValue)
+            if (level == 0)
             {
-                return this.FilterAndParseCollection<T>(this.UmbracoHelper.TypedContent(nodeId).Descendants());
+                return this.FilterAndParseCollection<T>(
+                    predicate == null ? this.UmbracoHelper.TypedContent(nodeId).Descendants()
+                    : this.UmbracoHelper.TypedContent(nodeId).Descendants().Where(predicate));
             }
 
-            return this.FilterAndParseCollection<T>(this.UmbracoHelper.TypedContent(nodeId).Descendants(level));
+            return this.FilterAndParseCollection<T>(predicate == null
+                ? this.UmbracoHelper.TypedContent(nodeId).Descendants(level)
+                : this.UmbracoHelper.TypedContent(nodeId).Descendants(level).Where(predicate));
         }
 
         /// <summary>

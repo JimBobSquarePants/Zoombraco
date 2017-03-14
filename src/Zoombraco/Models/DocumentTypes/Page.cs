@@ -135,21 +135,21 @@ namespace Zoombraco.Models
         }
 
         /// <inheritdoc/>
-        public IEnumerable<T> Ancestors<T>(int maxLevel = int.MaxValue)
+        public IEnumerable<T> Ancestors<T>(int maxLevel = int.MaxValue, Func<IPublishedContent, bool> predicate = null)
         {
             return this.ContentHelper().GetAncestors<T>(this.Id, maxLevel);
         }
 
         /// <inheritdoc/>
-        public IEnumerable<T> Children<T>()
+        public IEnumerable<T> Children<T>(Func<IPublishedContent, bool> predicate = null)
         {
-            return this.ContentHelper().GetChildren<T>(this.Id);
+            return this.ContentHelper().GetChildren<T>(this.Id, predicate);
         }
 
         /// <inheritdoc/>
-        public IEnumerable<T> Descendents<T>(int level = int.MaxValue)
+        public IEnumerable<T> Descendents<T>(int level = int.MaxValue, Func<IPublishedContent, bool> predicate = null)
         {
-            return this.ContentHelper().GetDescendants<T>(this.Id, level);
+            return this.ContentHelper().GetDescendants<T>(this.Id, level, predicate);
         }
 
         /// <summary>

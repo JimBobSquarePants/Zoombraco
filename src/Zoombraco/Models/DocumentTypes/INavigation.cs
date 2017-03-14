@@ -7,6 +7,7 @@ namespace Zoombraco.Models
 {
     using System;
     using System.Collections.Generic;
+    using Umbraco.Core.Models;
 
     /// <summary>
     /// Encapsulates methods that allow the retrieval of relative nodes.
@@ -27,28 +28,31 @@ namespace Zoombraco.Models
         /// </summary>
         /// <typeparam name="T">The type to return</typeparam>
         /// <param name="maxLevel">The maximum level to search.</param>
+        /// <param name="predicate">A function to test each item for a condition.</param>
         /// <returns>
         /// The <see cref="IEnumerable{T}"/>.
         /// </returns>
-        IEnumerable<T> Ancestors<T>(int maxLevel);
+        IEnumerable<T> Ancestors<T>(int maxLevel, Func<IPublishedContent, bool> predicate);
 
         /// <summary>
         /// Gets the children of the current instance as the given <see cref="Type"/>.
         /// </summary>
+        /// <param name="predicate">A function to test each item for a condition.</param>
         /// <typeparam name="T">The type to return</typeparam>
         /// <returns>
         /// The <see cref="IEnumerable{T}"/>.
         /// </returns>
-        IEnumerable<T> Children<T>();
+        IEnumerable<T> Children<T>(Func<IPublishedContent, bool> predicate);
 
         /// <summary>
         /// Gets the descendants of the current instance as the given <see cref="Type"/>.
         /// </summary>
         /// <typeparam name="T">The type to return</typeparam>
         /// <param name="level">The level to search.</param>
+        /// <param name="predicate">A function to test each item for a condition.</param>
         /// <returns>
         /// The <see cref="IEnumerable{T}"/>.
         /// </returns>
-        IEnumerable<T> Descendents<T>(int level);
+        IEnumerable<T> Descendents<T>(int level, Func<IPublishedContent, bool> predicate);
     }
 }

@@ -147,7 +147,7 @@ namespace Zoombraco.Models
         }
 
         /// <inheritdoc/>
-        public IEnumerable<T> Descendents<T>(int level = int.MaxValue, Func<IPublishedContent, bool> predicate = null)
+        public IEnumerable<T> Descendents<T>(int level = 0, Func<IPublishedContent, bool> predicate = null)
         {
             return this.ContentHelper().GetDescendants<T>(this.Id, level, predicate);
         }

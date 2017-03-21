@@ -1,0 +1,92 @@
+{
+  "name": "JimBobSquarePants/Zoombraco",
+  "version": "0.1.4",
+  "libraries": {
+    "xv": "^1.1.25"
+  },
+  "title": "Zoombraco",
+  "branch": "",
+  "style": {
+    "name": "Future",
+    "componentSet": {
+      "nav": "nav/BasicNav",
+      "header": "header/BannerHeader",
+      "article": "article/BasicArticle",
+      "footer": "footer/BasicFooter"
+    },
+    "fontFamily": "\"Avenir Next\", Helvetica, sans-serif",
+    "heading": {
+      "fontWeight": 500,
+      "textTransform": "uppercase",
+      "letterSpacing": "0.2em"
+    },
+    "alternativeText": {
+      "textTransform": "uppercase",
+      "fontWeight": 400,
+      "letterSpacing": "0.2em",
+      "opacity": 0.75
+    },
+    "colors": {
+      "text": "#333",
+      "background": "#fff",
+      "primary": "#666",
+      "secondary": "#888",
+      "highlight": "#1f80ff",
+      "muted": "#f6f6f6",
+      "border": "#eee"
+    },
+    "layout": {
+      "centered": true,
+      "maxWidth": 1024,
+      "bannerHeight": "80vh"
+    }
+  },
+  "content": [
+    {
+      "component": "nav",
+      "links": [
+        {
+          "href": "https://github.com/JimBobSquarePants/Zoombraco",
+          "text": "GitHub"
+        }
+      ]
+    },
+    {
+      "component": "header",
+      "heading": "Zoombraco",
+      "subhead": ":zap: A lean boilerplate for rapidly developing strong-typed Umbraco websites.",
+      "children": [
+        {
+          "component": "ui/TweetButton",
+          "text": "Zoombraco: :zap: A lean boilerplate for rapidly developing strong-typed Umbraco websites.",
+          "url": ""
+        },
+        {
+          "component": "ui/GithubButton",
+          "user": "JimBobSquarePants",
+          "repo": "Zoombraco"
+        }
+      ]
+    },
+    {
+      "component": "article",
+      "metadata": {
+        "source": "github.readme"
+      },
+      "html": "\n<p>This repository contains a lean boilerplate for rapidly developing fast, scalable, easy to maintain, strong-typed Umbraco websites. </p>\n<p><strong>Zoombraco</strong> is designed to be lean yet exceptionally powerful and flexible allowing you to create your own websites on a firm foundation. <strong>Zoombraco</strong> lets you concentrate on the fun features of your site while enabling you to maintain a strong MVC architecture.</p>\n<h2>Features</h2>\n<ul>\n<li>Three strong-typed Base-Class-Types <code>Page</code>, <code>Component</code>, <code>NestedComponent</code></li>\n<li>Base Controllers, Views</li>\n<li>Strong-typed <code>ContentHelper</code> for document traversal.</li>\n<li>Automatic mapping of Nested Content</li>\n<li>Automatic XML sitemap generation</li>\n<li>Language aware Metadata</li>\n<li>All properties can be made language aware and map automatically</li>\n<li>Faceted, language aware search engine with fragment highlighting</li>\n<li>Multitentant aware codebase</li>\n<li>Image CDN url generation.</li>\n</ul>\n<h2>Documentation</h2>\n<p>Documentation can be found via the <a href=\"https://github.com/JimBobSquarePants/Zoombraco/wiki\">Wiki</a> and is open for collaboration.</p>\n<h3>Consuming the Solution</h3>\n<p>At the moment the codebase is there but I&apos;m lacking a complete web demo. I&apos;ll get round to it though as I am writing documentation and an accompanying set of articles.</p>\n<p>Nightlies are available from <a href=\"https://www.myget.org/gallery/zoombraco\">MyGet</a></p>\n<p>A sample Nuget.config file is as follows:</p>\n<pre><span class=\"php\"><span class=\"hljs-meta\">&lt;?</span>xml version=<span class=\"hljs-string\">&quot;1.0&quot;</span> encoding=<span class=\"hljs-string\">&quot;utf-8&quot;</span><span class=\"hljs-meta\">?&gt;</span></span>\n<span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">configuration</span>&gt;</span>\n  <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">packageSources</span>&gt;</span>\n    <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">add</span> <span class=\"hljs-attr\">key</span>=<span class=\"hljs-string\">&quot;nuget.org&quot;</span> <span class=\"hljs-attr\">value</span>=<span class=\"hljs-string\">&quot;https://www.nuget.org/api/v2/&quot;</span> /&gt;</span>\n    <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">add</span> <span class=\"hljs-attr\">key</span>=<span class=\"hljs-string\">&quot;myget.ditto&quot;</span> <span class=\"hljs-attr\">value</span>=<span class=\"hljs-string\">&quot;https://www.myget.org/F/umbraco-ditto/&quot;</span> /&gt;</span>\n    <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">add</span> <span class=\"hljs-attr\">key</span>=<span class=\"hljs-string\">&quot;myget.zoombraco&quot;</span> <span class=\"hljs-attr\">value</span>=<span class=\"hljs-string\">&quot;https://www.myget.org/F/zoombraco/api/v3/index.json&quot;</span>/&gt;</span>\n  <span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">packageSources</span>&gt;</span>\n<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">configuration</span>&gt;</span></pre><p>Eventually there will be a Nuget package for consuming the library once the Ditto dependency is released.</p>\n<p>Having a play around is encouraged, I&apos;m always looking for feedback.</p>\n<p>The demo website login details are:</p>\n<ul>\n<li>Username : zoombraco</li>\n<li>Password : password</li>\n</ul>\n"
+    },
+    {
+      "component": "footer",
+      "links": [
+        {
+          "href": "https://github.com/JimBobSquarePants/Zoombraco",
+          "text": "GitHub"
+        },
+        {
+          "href": "https://github.com/JimBobSquarePants",
+          "text": "JimBobSquarePants"
+        }
+      ]
+    }
+  ]
+}

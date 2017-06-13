@@ -383,9 +383,7 @@ namespace Zoombraco.Helpers
         /// </returns>
         private IEnumerable<T> FilterAndParseCollection<T>(IEnumerable<IPublishedContent> contentList)
         {
-            // Prevent multiple enumeration.
-            IEnumerable<IPublishedContent> publishedContent = contentList as IPublishedContent[] ?? contentList.ToArray();
-            if (!publishedContent.Any())
+            if (!contentList.Any())
             {
                 yield break;
             }
@@ -395,9 +393,10 @@ namespace Zoombraco.Helpers
             // Filter the collection if necessary by our specific type.
             if (!this.IsInheritableType(returnType))
             {
-                publishedContent = publishedContent.Where(c => c.DocumentTypeAlias.InvariantEquals(returnType.Name));
+                contentList =
+                    contentList.Where(c => c.DocumentTypeAlias.InvariantEquals(returnType.Name));
 
-                foreach (IPublishedContent content in publishedContent)
+                foreach (IPublishedContent content in contentList)
                 {
                     Type type = this.GetRegisteredType(content.DocumentTypeAlias);
 
@@ -414,7 +413,7 @@ namespace Zoombraco.Helpers
             else
             {
                 // If we are passed an interface or a base type then we want to return all types that implement that interface or type.
-                foreach (IPublishedContent content in publishedContent)
+                foreach (IPublishedContent content in contentList)
                 {
                     Type type = this.GetRegisteredType(content.DocumentTypeAlias);
 

@@ -184,10 +184,10 @@ namespace Zoombraco.Search
             if (this.UseWildcards)
             {
                 parser.SetMultiTermRewriteMethod(MultiTermQuery.SCORING_BOOLEAN_QUERY_REWRITE);
-                return parser.Parse($"{highlightField}:{string.Join(" ", query.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries).Select(w => w.Trim().MultipleCharacterWildcard().Value))}");
+                return parser.Parse(QueryParser.Escape($"{highlightField}:{string.Join(" ", query.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries).Select(w => w.Trim().MultipleCharacterWildcard().Value))}"));
             }
 
-            return parser.Parse($"{highlightField}:{query}");
+            return parser.Parse(QueryParser.Escape($"{highlightField}:{query}"));
         }
 
         /// <summary>

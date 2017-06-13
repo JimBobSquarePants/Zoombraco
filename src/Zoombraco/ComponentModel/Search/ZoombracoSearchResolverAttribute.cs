@@ -7,11 +7,14 @@ namespace Zoombraco.ComponentModel.Search
 {
     using System;
     using System.Globalization;
+    using System.Linq;
     using System.Reflection;
     using Newtonsoft.Json;
     using Our.Umbraco.Vorto.Extensions;
     using Our.Umbraco.Vorto.Models;
+    using Umbraco.Core;
     using Umbraco.Core.Models;
+    using Umbraco.Web;
 
     /// <summary>
     /// A base class for resolving content for search results.
@@ -90,7 +93,104 @@ namespace Zoombraco.ComponentModel.Search
         /// <returns>The <see cref="bool"/></returns>
         private bool HasVortoValue()
         {
-            return this.Content.HasVortoValue(this.PropertyAlias, this.Culture.Name, this.Recursive);
+            try
+            {
+                return this.Content.HasVortoValue(this.PropertyAlias, this.Culture.Name, this.Recursive);
+            }
+            catch
+            {
+                // We've had to copy some of the logic from Vorto here to make HasVortoValue independent of the UmbracoContext
+                return this.HasVortoValueSafe(this.Content, this.PropertyAlias, this.Culture.Name, this.Recursive);
+            }
+        }
+
+        private bool HasVortoValueSafe(IPublishedContent content, string propertyAlias, string cultureName = null, bool recursive = false, string fallbackCultureName = null)
+        {
+            var hasValue = this.DoHasVortoValue(content, propertyAlias, cultureName, recursive);
+            if (!hasValue && !string.IsNullOrEmpty(fallbackCultureName) && !fallbackCultureName.Equals(cultureName))
+            {
+                hasValue = this.DoHasVortoValue(content, propertyAlias, fallbackCultureName, recursive);
+            }
+
+            return hasValue;
+        }
+
+        private bool DoHasVortoValue(IPublishedContent content, string propertyAlias, string cultureName, bool recursive)
+        {
+            if (!content.HasValue(propertyAlias, recursive))
+            {
+                return false;
+            }
+
+            return this.DoInnerHasVortoValue(content, propertyAlias, cultureName, recursive);
+        }
+
+        private bool DoInnerHasVortoValue(IPublishedContent content, string propertyAlias, string cultureName, bool recursive)
+        {
+            if (content.HasValue(propertyAlias))
+            {
+                // Allow checking our raw and parent values
+                string value = this.RawValue;
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    object dataValue = content.Properties
+                            .First(p => p.PropertyTypeAlias.InvariantEquals(propertyAlias))
+                            .DataValue;
+
+                    if (dataValue == null)
+                    {
+                        return false;
+                    }
+
+                    value = dataValue.ToString();
+                }
+
+                VortoValue vortoModel;
+
+                try
+                {
+                    vortoModel = JsonConvert.DeserializeObject<VortoValue>(value);
+                }
+                catch
+                {
+                    return false;
+                }
+
+                if (vortoModel?.Values != null)
+                {
+                    var bestMatchCultureName = this.FindBestMatchCulture(vortoModel, cultureName);
+                    if (!bestMatchCultureName.IsNullOrWhiteSpace()
+                        && vortoModel.Values.ContainsKey(bestMatchCultureName)
+                        && vortoModel.Values[bestMatchCultureName] != null
+                        && !vortoModel.Values[bestMatchCultureName].ToString().IsNullOrWhiteSpace())
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return recursive && content.Parent != null
+                && this.DoInnerHasVortoValue(content.Parent, propertyAlias, cultureName, true);
+        }
+
+        private string FindBestMatchCulture(VortoValue value, string cultureName)
+        {
+            // Check for actual values
+            if (value.Values == null)
+            {
+                return string.Empty;
+            }
+
+            // Check for exact match
+            if (value.Values.ContainsKey(cultureName))
+            {
+                return cultureName;
+            }
+
+            // Close match
+            return cultureName.Length == 2
+                ? value.Values.Keys.FirstOrDefault(x => x.StartsWith(cultureName + "-"))
+                : string.Empty;
         }
     }
 }

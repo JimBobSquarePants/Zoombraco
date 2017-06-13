@@ -340,7 +340,7 @@ namespace Zoombraco.Helpers
 
             Type returnType = typeof(T);
 
-            // Filter the collection if necessary by our specific type.
+            // Filter if necessary by our specific type.
             if (!this.IsInheritableType(returnType))
             {
                 Type type = this.GetRegisteredType(content.DocumentTypeAlias);

@@ -393,10 +393,10 @@ namespace Zoombraco.Helpers
             // Filter the collection if necessary by our specific type.
             if (!this.IsInheritableType(returnType))
             {
-                IEnumerable<IPublishedContent> publishedContent =
-                    contentList.Where(c => c.DocumentTypeAlias.InvariantEquals(returnType.Name)).ToArray();
+                contentList =
+                    contentList.Where(c => c.DocumentTypeAlias.InvariantEquals(returnType.Name));
 
-                foreach (IPublishedContent content in publishedContent)
+                foreach (IPublishedContent content in contentList)
                 {
                     Type type = this.GetRegisteredType(content.DocumentTypeAlias);
 

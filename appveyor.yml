@@ -5,7 +5,7 @@
     only:
     - master
 
-  version: 0.5.0.{build}
+  version: 0.6.0.{build}
 
   cache:
     - src\packages -> **\packages.config   # preserve "packages" directory in the root of build folder but will reset it if packages.config is modified

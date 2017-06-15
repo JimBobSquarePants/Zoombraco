@@ -8,15 +8,13 @@ namespace Zoombraco.Helpers
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Web;
-
     using Our.Umbraco.Ditto;
-
     using Umbraco.Core;
     using Umbraco.Core.Models;
     using Umbraco.Web;
-
     using Zoombraco.Models;
 
     /// <summary>
@@ -381,6 +379,7 @@ namespace Zoombraco.Helpers
         /// <returns>
         /// The <see cref="IEnumerable{T}"/>.
         /// </returns>
+        [SuppressMessage("ReSharper", "PossibleMultipleEnumeration", Justification = "Any doesn't enumerate full collection")]
         private IEnumerable<T> FilterAndParseCollection<T>(IEnumerable<IPublishedContent> contentList)
         {
             if (!contentList.Any())
@@ -393,8 +392,7 @@ namespace Zoombraco.Helpers
             // Filter the collection if necessary by our specific type.
             if (!this.IsInheritableType(returnType))
             {
-                contentList =
-                    contentList.Where(c => c.DocumentTypeAlias.InvariantEquals(returnType.Name));
+                contentList = contentList.Where(c => c.DocumentTypeAlias.InvariantEquals(returnType.Name));
 
                 foreach (IPublishedContent content in contentList)
                 {

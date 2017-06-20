@@ -5,9 +5,11 @@
 
 namespace Zoombraco.ComponentModel.Processors
 {
+    using System.Linq;
     using System.Web;
     using Our.Umbraco.Ditto;
     using Our.Umbraco.Vorto.Extensions;
+    using Umbraco.Core;
     using Umbraco.Core.Models;
 
     /// <summary>
@@ -55,6 +57,19 @@ namespace Zoombraco.ComponentModel.Processors
                 result = content.HasVortoValue(umbracoPropertyName, culture, this.Recursive, fallbackCulture)
                     ? content.GetVortoValue(umbracoPropertyName, culture, this.Recursive, null, fallbackCulture)
                     : this.GetPropertyValue(content, umbracoPropertyName, this.Recursive);
+            }
+
+            // If a vorto property is null and it's type is a string the base processor will return the property type name as the value.
+            if (result == null)
+            {
+                IPublishedProperty prop = content.Properties.FirstOrDefault(p => p.PropertyTypeAlias.InvariantEquals(umbracoPropertyName));
+                if (prop != null)
+                {
+                    if (prop.DataValue.ToString().InvariantContains("dtdGuid"))
+                    {
+                        return null;
+                    }
+                }
             }
 
             return result ?? base.ProcessValue();

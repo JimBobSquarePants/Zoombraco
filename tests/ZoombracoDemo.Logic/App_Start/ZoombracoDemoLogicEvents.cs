@@ -5,6 +5,7 @@
 
 namespace ZoombracoDemo.Logic
 {
+    using System.Web.Http;
     using Umbraco.Core;
 
     /// <summary>
@@ -24,6 +25,7 @@ namespace ZoombracoDemo.Logic
         /// </param>
         protected override void ApplicationStarting(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             NinjectWebCommon.UmbracoStart();
         }
     }

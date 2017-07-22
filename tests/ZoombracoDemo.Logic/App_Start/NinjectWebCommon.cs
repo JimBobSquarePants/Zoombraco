@@ -31,9 +31,11 @@ namespace ZoombracoDemo.Logic
         /// <summary>
         /// Starts the Umbraco application
         /// </summary>
-        public static void UmbracoStart()
+        /// <returns>The created kernel</returns>
+        public static IKernel UmbracoStart()
         {
             Bootstrapper.Initialize(CreateKernel);
+            return Bootstrapper.Kernel;
         }
 
         /// <summary>
@@ -72,16 +74,16 @@ namespace ZoombracoDemo.Logic
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            // Calls the BLL common services.
-            // I have the common bindings on implementation level for easy managing.
+            // Bind the common services.
             CommonServices.Register(kernel);
 
             // Set the resolvers for both the MVC architecture and the Web API architecture in that order
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
-            GlobalConfiguration.Configuration.DependencyResolver = new NinjectDependencyResolver(kernel);
 
-            // Custom Activator. url: https://our.umbraco.org/forum/core/general/55057-714-WebApi-and-Unity-IOC-brakes-BackOffice
-            GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerActivator), new UmbracoWebApiHttpControllerActivator());
+            // Don't use the default dependency resolver as it causes the Umbraco backoffice to immediately log out. Instead use a
+            // custom activator based on the code descriped at: https://our.umbraco.org/forum/core/general/55057-714-WebApi-and-Unity-IOC-brakes-BackOffice
+            // GlobalConfiguration.Configuration.DependencyResolver = new NinjectDependencyResolver(kernel);
+            GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerActivator), new UmbracoWebApiHttpControllerActivator(kernel));
         }
     }
 }

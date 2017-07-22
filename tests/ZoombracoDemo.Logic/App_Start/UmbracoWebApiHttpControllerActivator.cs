@@ -9,30 +9,42 @@ namespace ZoombracoDemo.Logic
     using System.Net.Http;
     using System.Web.Http.Controllers;
     using System.Web.Http.Dispatcher;
+    using Ninject;
+    using Ninject.Web.WebApi;
 
     /// <summary>
-    /// The Umbraco HttpController Activator
+    /// The Umbraco HttpController Activator based on the link below with additional constructor injection functionality
     /// <see href="https://our.umbraco.org/forum/core/general/55057-714-WebApi-and-Unity-IOC-brakes-BackOffice"/>
     /// </summary>
     public class UmbracoWebApiHttpControllerActivator : IHttpControllerActivator
     {
-        private readonly DefaultHttpControllerActivator defaultHttpControllerActivator;
+        private readonly IKernel kernel;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UmbracoWebApiHttpControllerActivator"/> class.
         /// </summary>
-        public UmbracoWebApiHttpControllerActivator()
+        /// <param name="kernel">The kernel super-factory</param>
+        public UmbracoWebApiHttpControllerActivator(IKernel kernel)
         {
-            this.defaultHttpControllerActivator = new DefaultHttpControllerActivator();
+            this.kernel = kernel;
         }
 
         /// <inheritdoc/>
         public IHttpController Create(HttpRequestMessage request, HttpControllerDescriptor controllerDescriptor, Type controllerType)
         {
-            IHttpController instance =
-                this.IsUmbracoController(controllerType)
-                    ? Activator.CreateInstance(controllerType) as IHttpController
-                    : this.defaultHttpControllerActivator.Create(request, controllerDescriptor, controllerType);
+            IHttpController instance;
+            if (this.IsUmbracoController(controllerType))
+            {
+                instance = Activator.CreateInstance(controllerType) as IHttpController;
+            }
+            else
+            {
+                // Using the NinjectDependencyScope allows use to implement constructor injection
+                using (var scope = new NinjectDependencyScope(this.kernel.BeginBlock()))
+                {
+                    instance = scope.GetService(controllerType) as IHttpController;
+                }
+            }
 
             return instance;
         }

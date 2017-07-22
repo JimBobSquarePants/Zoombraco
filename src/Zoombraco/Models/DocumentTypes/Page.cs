@@ -135,21 +135,21 @@ namespace Zoombraco.Models
         }
 
         /// <inheritdoc/>
-        public IEnumerable<T> Ancestors<T>(int maxLevel = int.MaxValue, Func<IPublishedContent, bool> predicate = null)
+        public IEnumerable<T> Ancestors<T>(int maxLevel = int.MaxValue, Func<IPublishedContent, bool> predicate = null, int skip = 0, int take = int.MaxValue)
         {
-            return this.ContentHelper().GetAncestors<T>(this.Id, maxLevel);
+            return this.ContentHelper().GetAncestors<T>(this.Id, maxLevel, predicate, skip, take);
         }
 
         /// <inheritdoc/>
-        public IEnumerable<T> Children<T>(Func<IPublishedContent, bool> predicate = null)
+        public IEnumerable<T> Children<T>(Func<IPublishedContent, bool> predicate = null, int skip = 0, int take = int.MaxValue)
         {
-            return this.ContentHelper().GetChildren<T>(this.Id, predicate);
+            return this.ContentHelper().GetChildren<T>(this.Id, predicate, skip, take);
         }
 
         /// <inheritdoc/>
-        public IEnumerable<T> Descendents<T>(int level = 0, Func<IPublishedContent, bool> predicate = null)
+        public IEnumerable<T> Descendents<T>(int level = 0, Func<IPublishedContent, bool> predicate = null, int skip = 0, int take = int.MaxValue)
         {
-            return this.ContentHelper().GetDescendants<T>(this.Id, level, predicate);
+            return this.ContentHelper().GetDescendants<T>(this.Id, level, predicate, skip, take);
         }
 
         /// <summary>

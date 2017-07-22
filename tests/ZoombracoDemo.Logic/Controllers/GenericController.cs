@@ -6,16 +6,12 @@
 namespace ZoombracoDemo.Logic.Controllers
 {
     using System.Web.Mvc;
-
-    using Our.Umbraco.Ditto;
-
     using Umbraco.Web.Models;
-
     using Zoombraco.ComponentModel.Caching;
     using Zoombraco.Controllers;
     using Zoombraco.Models;
-
     using ZoombracoDemo.Logic.Models;
+    using ZoombracoDemo.Logic.Services;
 
     /// <summary>
     /// The Generic page controller
@@ -23,11 +19,21 @@ namespace ZoombracoDemo.Logic.Controllers
     [UmbracoOutputCache]
     public class GenericController : ZoombracoController
     {
+        private readonly IGenericService genericService;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GenericController"/> class.
+        /// </summary>
+        /// <param name="genericService">The generic service</param>
+        public GenericController(IGenericService genericService)
+        {
+            this.genericService = genericService;
+        }
+
         /// <inheritdoc />
         public override ActionResult Index(RenderModel model)
         {
-            Generic generic = model.As<Generic>();
-            RenderPage<Generic> viewModel = new RenderPage<Generic>(generic);
+            RenderPage<Generic> viewModel = new RenderPage<Generic>(this.genericService.GetById(model.Content.Id));
 
             return this.CurrentTemplate(viewModel);
         }

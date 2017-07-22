@@ -16,7 +16,7 @@ namespace Zoombraco.Resources
     /// <summary>
     /// Provides methods for retrieving embedded resources.
     /// </summary>
-    internal class EmbeddedResourceHelper
+    public class EmbeddedResourceHelper
     {
         /// <summary>
         /// Returns a value indicating whether the given resource exists.

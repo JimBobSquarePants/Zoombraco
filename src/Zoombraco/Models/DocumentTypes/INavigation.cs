@@ -29,20 +29,24 @@ namespace Zoombraco.Models
         /// <typeparam name="T">The type to return</typeparam>
         /// <param name="maxLevel">The maximum level to search.</param>
         /// <param name="predicate">A function to test each item for a condition.</param>
+        /// <param name="skip">The number of elements to bypass in the collection</param>
+        /// <param name="take">The number of contiguous elements to take from the collection</param>
         /// <returns>
         /// The <see cref="IEnumerable{T}"/>.
         /// </returns>
-        IEnumerable<T> Ancestors<T>(int maxLevel, Func<IPublishedContent, bool> predicate);
+        IEnumerable<T> Ancestors<T>(int maxLevel, Func<IPublishedContent, bool> predicate, int skip, int take);
 
         /// <summary>
         /// Gets the children of the current instance as the given <see cref="Type"/>.
         /// </summary>
         /// <param name="predicate">A function to test each item for a condition.</param>
+        /// <param name="skip">The number of elements to bypass in the collection</param>
+        /// <param name="take">The number of contiguous elements to take from the collection</param>
         /// <typeparam name="T">The type to return</typeparam>
         /// <returns>
         /// The <see cref="IEnumerable{T}"/>.
         /// </returns>
-        IEnumerable<T> Children<T>(Func<IPublishedContent, bool> predicate);
+        IEnumerable<T> Children<T>(Func<IPublishedContent, bool> predicate, int skip, int take);
 
         /// <summary>
         /// Gets the descendants of the current instance as the given <see cref="Type"/>.
@@ -50,9 +54,11 @@ namespace Zoombraco.Models
         /// <typeparam name="T">The type to return</typeparam>
         /// <param name="level">The level to search.</param>
         /// <param name="predicate">A function to test each item for a condition.</param>
+        /// <param name="skip">The number of elements to bypass in the collection</param>
+        /// <param name="take">The number of contiguous elements to take from the collection</param>
         /// <returns>
         /// The <see cref="IEnumerable{T}"/>.
         /// </returns>
-        IEnumerable<T> Descendents<T>(int level, Func<IPublishedContent, bool> predicate);
+        IEnumerable<T> Descendents<T>(int level, Func<IPublishedContent, bool> predicate, int skip, int take);
     }
 }

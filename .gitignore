@@ -240,8 +240,8 @@ pip-log.txt
 **/App_Data/*.udt
 **/aspnet_client/
 
-# Ignore Umbraco content cache file
-**/App_Data/umbraco.config
+# Don't Ignore Umbraco content cache file
+#**/App_Data/umbraco.config
 
 # Ignore umbraco backoffice files. These get copied on build.
 **/umbraco/

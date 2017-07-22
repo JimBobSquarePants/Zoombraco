@@ -6,16 +6,12 @@
 namespace ZoombracoDemo.Logic.Controllers
 {
     using System.Web.Mvc;
-
-    using Our.Umbraco.Ditto;
-
     using Umbraco.Web.Models;
-
     using Zoombraco.ComponentModel.Caching;
     using Zoombraco.Controllers;
     using Zoombraco.Models;
-
     using ZoombracoDemo.Logic.Models;
+    using ZoombracoDemo.Logic.Services;
 
     /// <summary>
     /// The home page controller
@@ -23,11 +19,21 @@ namespace ZoombracoDemo.Logic.Controllers
     [UmbracoOutputCache]
     public class HomeController : ZoombracoController
     {
+        private readonly IHomeService homeService;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HomeController"/> class.
+        /// </summary>
+        /// <param name="homeService">The home service</param>
+        public HomeController(IHomeService homeService)
+        {
+            this.homeService = homeService;
+        }
+
         /// <inheritdoc />
         public override ActionResult Index(RenderModel model)
         {
-            Home home = model.As<Home>();
-            RenderPage<Home> viewModel = new RenderPage<Home>(home);
+            RenderPage<Home> viewModel = new RenderPage<Home>(this.homeService.GetById(model.Content.Id));
 
             return this.CurrentTemplate(viewModel);
         }

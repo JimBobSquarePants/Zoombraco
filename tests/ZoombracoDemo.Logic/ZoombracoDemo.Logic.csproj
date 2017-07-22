@@ -269,12 +269,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\NinjectWeb.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\CommonServices.cs" />
     <Compile Include="App_Start\NinjectDependencyResolver.cs" />
     <Compile Include="App_Start\UmbracoWebApiHttpControllerActivator.cs" />
-    <Compile Include="App_Start\NinjectWeb.cs" />
-    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\ZoombracoDemoLogicEvents.cs" />
     <Compile Include="Controllers\GenericApiController.cs" />
     <Compile Include="Controllers\GenericController.cs" />

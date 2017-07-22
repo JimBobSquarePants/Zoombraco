@@ -18,6 +18,7 @@ namespace ZoombracoDemo.Logic
     /// </summary>
     public class UmbracoWebApiHttpControllerActivator : IHttpControllerActivator
     {
+        private readonly DefaultHttpControllerActivator defaultHttpControllerActivator;
         private readonly IKernel kernel;
 
         /// <summary>
@@ -27,6 +28,7 @@ namespace ZoombracoDemo.Logic
         public UmbracoWebApiHttpControllerActivator(IKernel kernel)
         {
             this.kernel = kernel;
+            this.defaultHttpControllerActivator = new DefaultHttpControllerActivator();
         }
 
         /// <inheritdoc/>
@@ -35,12 +37,12 @@ namespace ZoombracoDemo.Logic
             IHttpController instance;
             if (this.IsUmbracoController(controllerType))
             {
-                instance = Activator.CreateInstance(controllerType) as IHttpController;
+                instance = this.defaultHttpControllerActivator.Create(request, controllerDescriptor, controllerType);
             }
             else
             {
                 // Using the NinjectDependencyScope allows use to implement constructor injection
-                using (var scope = new NinjectDependencyScope(this.kernel.BeginBlock()))
+                using (var scope = new NinjectDependencyScope(this.kernel))
                 {
                     instance = scope.GetService(controllerType) as IHttpController;
                 }

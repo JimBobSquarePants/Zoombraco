@@ -26,7 +26,7 @@ namespace ZoombracoDemo.Logic
         protected override void ApplicationStarting(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            NinjectWebCommon.UmbracoStart();
+            NinjectWeb.UmbracoStart();
         }
     }
 }

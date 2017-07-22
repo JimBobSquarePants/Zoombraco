@@ -6,8 +6,9 @@
 namespace ZoombracoDemo.Logic.Controllers
 {
     using System.Web.Http;
+    using ComponentModel.Attributes;
+    using Services;
     using Umbraco.Web.WebApi;
-    using ZoombracoDemo.Logic.Services;
 
     /// <summary>
     /// The Generic api controller
@@ -25,7 +26,12 @@ namespace ZoombracoDemo.Logic.Controllers
             this.genericService = genericService;
         }
 
-        [Route("api/generic/{id}")]
+        /// <summary>
+        /// Returns the generic page that matches the given id
+        /// </summary>
+        /// <param name="id">The page id</param>
+        /// <returns>The <see cref="IHttpActionResult"/></returns>
+        [RouteVersion("api/generic/{id}", 1)]
         [HttpGet]
         public IHttpActionResult GetById(int id)
         {

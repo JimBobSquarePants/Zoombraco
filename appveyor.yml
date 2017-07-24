@@ -21,7 +21,7 @@
   test:
     assemblies:
       only:
-      - '**\*.Zoombraco.Tests.dll'
+      - '**\Zoombraco.Tests.dll'
 
   nuget:
     account_feed: true
@@ -78,7 +78,7 @@
   test:
     assemblies:
       only:
-      - '**\*.Zoombraco.Tests.dll'
+      - '**\Zoombraco.Tests.dll'
 
   nuget:
     account_feed: true
@@ -129,4 +129,4 @@
   test:
     assemblies:
       only:
-      - '**\*.Zoombraco.Tests.dll'
+      - '**\Zoombraco.Tests.dll'

@@ -18,6 +18,11 @@
   build:
     verbosity: minimal
 
+  test:
+    assemblies:
+      only:
+      - '**\*.Zoombraco.Tests.dll'
+
   nuget:
     account_feed: true
     project_feed: true
@@ -37,12 +42,6 @@
 
   after_build:
   - ps: nuget pack Zoombraco.nuspec -version "$env:PackageVersion"
-
-  test:
-  # only assemblies to test
-  assemblies:
-    only:
-      - '**\*.Zoombraco.Tests.dll'
 
   artifacts:
   - path: 'Zoombraco*.nupkg'
@@ -76,6 +75,11 @@
   build:
     verbosity: minimal
 
+  test:
+    assemblies:
+      only:
+      - '**\*.Zoombraco.Tests.dll'
+
   nuget:
     account_feed: true
     project_feed: true
@@ -95,12 +99,6 @@
 
   after_build:
   - ps: nuget pack Zoombraco.nuspec -version "$env:PackageVersion"
-
-    test:
-  # only assemblies to test
-  assemblies:
-    only:
-      - '**\*.Zoombraco.Tests.dll'
 
   artifacts:
   - path: 'Zoombraco*.nupkg'
@@ -127,3 +125,8 @@
 
   build:
     verbosity: minimal
+
+  test:
+    assemblies:
+      only:
+      - '**\*.Zoombraco.Tests.dll'

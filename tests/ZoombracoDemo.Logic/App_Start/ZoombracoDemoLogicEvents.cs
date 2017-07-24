@@ -14,18 +14,21 @@ namespace ZoombracoDemo.Logic
     public class ZoombracoDemoLogicEvents : ApplicationEventHandler
     {
         /// <summary>
-        /// Overridable method to execute when all resolvers have been initialized but resolution is not frozen so they
-        /// can be modified in this method.
+        /// Boot-up is completed, this allows you to perform any other boot-up logic required for the application.
+        /// Resolution is frozen so now they can be used to resolve instances.
         /// </summary>
         /// <param name="umbracoApplication">
         /// The current <see cref="UmbracoApplicationBase"/>
         /// </param>
-        /// <param name="applicationContext">cal
+        /// <param name="applicationContext">
         /// The Umbraco <see cref="ApplicationContext"/> for the current application.
         /// </param>
-        protected override void ApplicationStarting(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+        protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
+
+            // IOC bindings need to be set once resolution is complete
+            // https://our.umbraco.org/documentation/reference/using-ioc
             NinjectWeb.UmbracoStart();
         }
     }

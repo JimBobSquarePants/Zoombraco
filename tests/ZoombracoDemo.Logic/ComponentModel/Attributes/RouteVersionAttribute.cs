@@ -40,25 +40,9 @@ namespace ZoombracoDemo.Logic.ComponentModel.Attributes
         public int Version { get; }
 
         /// <inheritdoc/>
-        public override IDictionary<string, object> Constraints
-        {
-            get
-            {
-                var constraints = new HttpRouteValueDictionary();
-                constraints.Add("version", new RouteVersionHttpConstraint(this.Version));
-                return constraints;
-            }
-        }
+        public override IDictionary<string, object> Constraints => new HttpRouteValueDictionary { { "version", new RouteVersionHttpConstraint(this.Version) } };
 
         /// <inheritdoc/>
-        public override IDictionary<string, object> Defaults
-        {
-            get
-            {
-                var defaults = new HttpRouteValueDictionary();
-                defaults.Add("version", 1);
-                return defaults;
-            }
-        }
+        public override IDictionary<string, object> Defaults => new HttpRouteValueDictionary { { "version", 1 } };
     }
 }

@@ -38,6 +38,12 @@
   after_build:
   - ps: nuget pack Zoombraco.nuspec -version "$env:PackageVersion"
 
+  test:
+  # only assemblies to test
+  assemblies:
+    only:
+      - '**\*.Zoombraco.Tests.dll'
+
   artifacts:
   - path: 'Zoombraco*.nupkg'
     name: Zoombraco
@@ -89,6 +95,12 @@
 
   after_build:
   - ps: nuget pack Zoombraco.nuspec -version "$env:PackageVersion"
+
+    test:
+  # only assemblies to test
+  assemblies:
+    only:
+      - '**\*.Zoombraco.Tests.dll'
 
   artifacts:
   - path: 'Zoombraco*.nupkg'
